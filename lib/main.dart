@@ -1,6 +1,7 @@
 import 'package:cryptography/cryptography.dart';
 import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
+import 'package:jamiiclient/src/App.dart';
 import 'dart:convert';
 
 import 'package:web_socket_channel/io.dart';
@@ -51,21 +52,5 @@ void main() {
 
   // // close channel
   // channel.sink.close();
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text("Hello World"),
-        ),
-        body: Text("Hello World"),
-      ),
-    );
-  }
+  runApp(App());
 }
