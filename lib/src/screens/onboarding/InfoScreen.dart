@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class InfoScreen extends StatelessWidget {
   final int index;
@@ -7,9 +8,15 @@ class InfoScreen extends StatelessWidget {
   final String description;
   final String buttonText;
   final bool svgTop;
+  final String iconFile;
 
   InfoScreen(
-      {this.index, this.title, this.description, this.buttonText, this.svgTop});
+      {this.index,
+      this.title,
+      this.description,
+      this.buttonText,
+      this.svgTop,
+      this.iconFile});
 
   Widget build(BuildContext context) {
     return Padding(
@@ -17,19 +24,19 @@ class InfoScreen extends StatelessWidget {
       child: Column(
         children: [
           this.svgTop
-              ? buildsvgTop(this.title, this.description)
-              : buildsvgBottom(this.title, this.description),
+              ? buildsvgTop(this.title, this.description, this.iconFile)
+              : buildsvgBottom(this.title, this.description, this.iconFile),
           buildButton(buttonText)
         ],
       ),
     );
   }
 
-  Widget buildsvgTop(String title, String subtitle) {
+  Widget buildsvgTop(String title, String subtitle, String iconFile) {
     return Expanded(
       child: Column(
         children: [
-          buildSVG(),
+          buildSVG(iconFile),
           buildTitle(title, subtitle),
           Container(
             margin: EdgeInsets.only(bottom: 50),
@@ -39,12 +46,12 @@ class InfoScreen extends StatelessWidget {
     );
   }
 
-  Widget buildsvgBottom(String title, String subtitle) {
+  Widget buildsvgBottom(String title, String subtitle, String iconFile) {
     return Expanded(
       child: Column(
         children: [
           buildTitle(title, subtitle),
-          buildSVG(),
+          buildSVG(iconFile),
         ],
       ),
     );
@@ -72,10 +79,8 @@ class InfoScreen extends StatelessWidget {
     );
   }
 
-  Widget buildSVG() {
-    return Expanded(
-      child: Container(),
-    );
+  Widget buildSVG(String iconFile) {
+    return Expanded(child: Image.asset(iconFile));
   }
 
   Widget buildButton(String buttonText) {

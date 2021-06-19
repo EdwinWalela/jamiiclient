@@ -15,6 +15,7 @@ class OnBoardingScreen extends StatelessWidget {
             title: "Welcome to Jamii",
             description: "A transparent and secure way to vote",
             buttonText: "Get Started",
+            iconFile: "assets/gif/community.gif",
             svgTop: false,
           ),
           InfoScreen(
@@ -24,6 +25,7 @@ class OnBoardingScreen extends StatelessWidget {
                 "Your vote is cryptographically secured and sent to a private pee-to-peer network to be validated by the jamii",
             buttonText: "Get Started",
             svgTop: true,
+            iconFile: "assets/gif/Vault.gif",
           ),
           InfoScreen(
             index: 3,
@@ -32,6 +34,7 @@ class OnBoardingScreen extends StatelessWidget {
                 "Register for elections and cast your vote from anywhere using your mobile phone",
             buttonText: "Get Started",
             svgTop: false,
+            iconFile: "assets/gif/relax.gif",
           ),
           InfoScreen(
             index: 4,
@@ -40,6 +43,7 @@ class OnBoardingScreen extends StatelessWidget {
                 "Votes are secured using cryptography making it infeasible to be altered",
             buttonText: "Get Started",
             svgTop: true,
+            iconFile: "assets/gif/laptop.gif",
           ),
           InfoScreen(
             index: 5,
@@ -47,6 +51,7 @@ class OnBoardingScreen extends StatelessWidget {
             description: "Time to take control",
             buttonText: "Get Started",
             svgTop: false,
+            iconFile: "assets/gif/high-five.gif",
           ),
         ],
       ),
