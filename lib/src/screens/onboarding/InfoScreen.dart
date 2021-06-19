@@ -6,19 +6,45 @@ class InfoScreen extends StatelessWidget {
   final String title;
   final String description;
   final String buttonText;
+  final bool svgTop;
 
-  InfoScreen({this.index, this.title, this.description, this.buttonText});
+  InfoScreen(
+      {this.index, this.title, this.description, this.buttonText, this.svgTop});
 
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(20, 60, 20, 50),
+      padding: EdgeInsets.fromLTRB(30, 60, 30, 50),
       child: Column(
         children: [
-          buildTitle(this.title, this.description),
-          Expanded(
-            child: buildSVG(),
-          ),
+          this.svgTop
+              ? buildsvgTop(this.title, this.description)
+              : buildsvgBottom(this.title, this.description),
           buildButton(buttonText)
+        ],
+      ),
+    );
+  }
+
+  Widget buildsvgTop(String title, String subtitle) {
+    return Expanded(
+      child: Column(
+        children: [
+          buildSVG(),
+          buildTitle(title, subtitle),
+          Container(
+            margin: EdgeInsets.only(bottom: 50),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget buildsvgBottom(String title, String subtitle) {
+    return Expanded(
+      child: Column(
+        children: [
+          buildTitle(title, subtitle),
+          buildSVG(),
         ],
       ),
     );
@@ -47,7 +73,9 @@ class InfoScreen extends StatelessWidget {
   }
 
   Widget buildSVG() {
-    return Container();
+    return Expanded(
+      child: Container(),
+    );
   }
 
   Widget buildButton(String buttonText) {
