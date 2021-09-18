@@ -7,7 +7,7 @@ import 'dart:convert';
 import 'package:web_socket_channel/io.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
-void main() {
+void main() async {
   // final algorithim = Ed25519();
   // final keyPair = await algorithim.newKeyPair();
   // final pubKey = await keyPair.extractPublicKey();
@@ -28,7 +28,8 @@ void main() {
 
   // // encode64 signature
   // final sig64 = base64Encode(signature.bytes);
-
+  // //
+  // print(signature.bytes);
   // final data = "$digest|$sig64|$pub64|$pub64.$pub64.$pub64.$pub64|$timestamp";
   // final header = {
   //   "source": "client",
@@ -36,7 +37,7 @@ void main() {
   //   "data": "$data",
   // };
 
-  // IO.Socket socket = IO.io('wss://091d1f7f7171.ngrok.io');
+  // IO.Socket socket = IO.io('wss://93a8a7aee2d1.ngrok.io');
 
   // try {
   //   socket.onConnect((data) => {
@@ -47,10 +48,10 @@ void main() {
   //   print("error");
   // }
   // Send vote
-  // final channel = IOWebSocketChannel.connect("wss://bde039a33cea.ngrok.io",
+  // final channel = IOWebSocketChannel.connect("wss://93a8a7aee2d1.ngrok.io",
   //     headers: header);
 
-  // // close channel
+  // close channel
   // channel.sink.close();
   runApp(App());
 }
