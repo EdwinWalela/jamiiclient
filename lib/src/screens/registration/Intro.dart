@@ -10,7 +10,19 @@ class Intro extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.all(10),
       child: Column(
-        children: [header, buildButton("Get Started", pageController)],
+        children: [
+          header,
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              buildSteps("1. Take a photo of yourself"),
+              buildSteps("2. Take a photo of your National ID Card"),
+              buildSteps("3. Confirm details"),
+              buildSteps("4. Submit registration for verification"),
+            ],
+          ),
+          buildButton("Get Started", pageController),
+        ],
       ),
     );
   }
@@ -22,6 +34,18 @@ class Intro extends StatelessWidget {
             duration: Duration(milliseconds: 500), curve: Curves.easeInOut);
       },
       child: Text(buttonText),
+    );
+  }
+
+  Widget buildSteps(String content) {
+    return Container(
+      margin: EdgeInsets.only(top: 10),
+      child: Text(
+        content,
+        style: TextStyle(
+          fontSize: 15,
+        ),
+      ),
     );
   }
 }
