@@ -1,6 +1,4 @@
-# jamiiclient
-
-A new Flutter project.
+# Jamii Client
 
 ## Getting Started
 
