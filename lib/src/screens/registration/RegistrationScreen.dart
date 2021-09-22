@@ -5,11 +5,11 @@ import 'package:jamiiclient/src/screens/registration/Intro.dart';
 
 class RegistrationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
-    final PageController pageController = PageController(initialPage: 1);
+    final PageController pageController = PageController(initialPage: 0);
 
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.only(left: 40, right: 40),
+        padding: EdgeInsets.only(left: 20, right: 20),
         child: PageView(
           physics: NeverScrollableScrollPhysics(),
           scrollDirection: Axis.horizontal,

@@ -35,8 +35,12 @@ class Biometrics extends StatelessWidget {
 
   Widget buildImageFrame(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * 0.6,
-      height: MediaQuery.of(context).size.width * 0.6,
+      width: this.isPotrait
+          ? MediaQuery.of(context).size.width * 0.6
+          : MediaQuery.of(context).size.width * 0.8,
+      height: this.isPotrait
+          ? MediaQuery.of(context).size.width * 0.6
+          : MediaQuery.of(context).size.width * 0.5,
       decoration: BoxDecoration(
         border: Border.all(color: Colors.black, width: 3),
       ),
