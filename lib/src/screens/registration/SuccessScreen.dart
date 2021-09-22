@@ -8,6 +8,7 @@ class SuccessScreen extends StatelessWidget {
         buildSuccessIcon(context),
         Container(margin: EdgeInsets.only(top: 30)),
         buildTitle(),
+        Container(margin: EdgeInsets.only(top: 10)),
         buildSubTitle(),
       ],
     );
@@ -25,7 +26,8 @@ class SuccessScreen extends StatelessWidget {
       "Process might take a while you'll be notified once verification is complete",
       textAlign: TextAlign.center,
       style: TextStyle(
-        fontSize: 17,
+        fontSize: 15,
+        color: Colors.grey[700],
       ),
     );
   }
