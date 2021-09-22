@@ -25,6 +25,7 @@ class DetailConfirmationScreen extends StatelessWidget {
         buildDetail("Name:", true, "Edwin Walela"),
         buildDetail("Sex:", true, "Male"),
         buildDetail("DOB:", true, "26/09/1999"),
+        Container(margin: EdgeInsets.only(top: 40)),
         buildButton(false),
       ],
     );

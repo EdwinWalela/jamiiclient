@@ -4,10 +4,11 @@ import 'package:jamiiclient/src/screens/registration/Biometrics.dart';
 import 'package:jamiiclient/src/screens/registration/CheckingScreen.dart';
 import 'package:jamiiclient/src/screens/registration/DetailConfirmationScreen.dart';
 import 'package:jamiiclient/src/screens/registration/Intro.dart';
+import 'package:jamiiclient/src/screens/registration/SuccessScreen.dart';
 
 class RegistrationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
-    final PageController pageController = PageController(initialPage: 4);
+    final PageController pageController = PageController(initialPage: 5);
 
     return Scaffold(
       body: Padding(
@@ -30,6 +31,7 @@ class RegistrationScreen extends StatelessWidget {
             DetailConfirmationScreen(
               header: "Step 3: Confirm Registration Details",
             ),
+            SuccessScreen(),
           ],
         ),
       ),
