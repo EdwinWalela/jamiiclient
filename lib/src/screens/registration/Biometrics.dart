@@ -11,22 +11,48 @@ class Biometrics extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.fromLTRB(30, 60, 30, 50),
       child: Column(
-        children: [buildHeader(header), buildButton("Capture", pageController)],
+        children: [
+          Container(margin: EdgeInsets.only(top: 20)),
+          buildHeader(header),
+          Container(margin: EdgeInsets.only(top: 40)),
+          buildImageFrame(context),
+          Container(margin: EdgeInsets.only(top: 40)),
+          buildButton("Capture", pageController),
+        ],
       ),
     );
   }
 
   Widget buildHeader(String header) {
-    return Text(header);
+    return Text(
+      header,
+      style: TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.bold,
+      ),
+    );
+  }
+
+  Widget buildImageFrame(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width * 0.6,
+      height: MediaQuery.of(context).size.width * 0.6,
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.black, width: 3),
+      ),
+    );
   }
 
   Widget buildButton(String buttonText, PageController pageController) {
-    return ElevatedButton(
-      onPressed: () async {
-        pageController.nextPage(
-            duration: Duration(milliseconds: 500), curve: Curves.easeInOut);
-      },
-      child: Text(buttonText),
+    return SizedBox(
+      width: 200,
+      child: ElevatedButton(
+        onPressed: () async {
+          pageController.nextPage(
+              duration: Duration(milliseconds: 500), curve: Curves.easeInOut);
+        },
+        child: Text(buttonText),
+      ),
     );
   }
 }
