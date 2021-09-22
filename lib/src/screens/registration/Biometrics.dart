@@ -8,18 +8,15 @@ class Biometrics extends StatelessWidget {
   Biometrics({this.header, this.isPotrait, this.pageController});
 
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.fromLTRB(30, 60, 30, 50),
-      child: Column(
-        children: [
-          Container(margin: EdgeInsets.only(top: 20)),
-          buildHeader(header),
-          Container(margin: EdgeInsets.only(top: 40)),
-          buildImageFrame(context),
-          Container(margin: EdgeInsets.only(top: 40)),
-          buildButton("Capture", pageController),
-        ],
-      ),
+    return Column(
+      children: [
+        Container(margin: EdgeInsets.only(top: 20)),
+        buildHeader(header),
+        Container(margin: EdgeInsets.only(top: 40)),
+        buildImageFrame(context),
+        Container(margin: EdgeInsets.only(top: 40)),
+        buildButton("Capture", pageController),
+      ],
     );
   }
 

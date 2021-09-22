@@ -9,7 +9,6 @@ class Intro extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(margin: EdgeInsets.only(top: 50)),
         buildHeader(),
         buildRegisterGif(),
         Column(
