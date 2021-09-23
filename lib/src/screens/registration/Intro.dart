@@ -10,7 +10,7 @@ class Intro extends StatelessWidget {
     return Column(
       children: [
         buildHeader(),
-        buildRegisterGif(),
+        buildRegisterGif(context),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -20,7 +20,7 @@ class Intro extends StatelessWidget {
             buildSteps("4. Submit registration for verification"),
           ],
         ),
-        Container(margin: EdgeInsets.only(top: 80)),
+        Container(margin: EdgeInsets.only(top: 50)),
         buildButton("Get Started", pageController),
       ],
     );
@@ -36,9 +36,10 @@ class Intro extends StatelessWidget {
     );
   }
 
-  Widget buildRegisterGif() {
+  Widget buildRegisterGif(BuildContext context) {
     return Image.asset(
       "assets/gif/register.gif",
+      height: MediaQuery.of(context).size.height * 0.4,
     );
   }
 

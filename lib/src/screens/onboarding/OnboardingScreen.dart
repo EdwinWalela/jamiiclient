@@ -23,7 +23,7 @@ class OnBoardingScreen extends StatelessWidget {
             index: 2,
             title: "Transparent Yet Confidential",
             description:
-                "Your vote is cryptographically secured and sent to a private pee-to-peer network to be validated by the jamii",
+                "Your vote is cryptographically secured and sent to a private peer-to-peer network to be validated by the jamii",
             buttonText: "Next",
             svgTop: true,
             iconFile: "assets/gif/Vault.gif",
