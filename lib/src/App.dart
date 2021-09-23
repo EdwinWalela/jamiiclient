@@ -8,8 +8,8 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: "Jamii",
       debugShowCheckedModeBanner: false,
-      // home: OnBoardingScreen(),
-      home: RegistrationScreen(),
+      home: OnBoardingScreen(),
+      // home: RegistrationScreen(),
     );
   }
 }
