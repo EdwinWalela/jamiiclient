@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class InfoScreen extends StatelessWidget {
   final int index;
@@ -29,7 +28,7 @@ class InfoScreen extends StatelessWidget {
           this.svgTop
               ? buildsvgTop(this.title, this.description, this.iconFile)
               : buildsvgBottom(this.title, this.description, this.iconFile),
-          this.index != 5 ? buildNext(buttonText) : buildGetStarted()
+          this.index != 5 ? buildNext(buttonText) : buildGetStarted(context)
         ],
       ),
     );
@@ -87,12 +86,12 @@ class InfoScreen extends StatelessWidget {
     return Expanded(child: Image.asset(iconFile));
   }
 
-  Widget buildGetStarted() {
+  Widget buildGetStarted(BuildContext context) {
     return SizedBox(
       width: 200,
       child: ElevatedButton(
         onPressed: () async {
-          // Navigate to registration
+          Navigator.of(context).pushNamed('/register');
         },
         child: Padding(
           padding: EdgeInsets.all(5),

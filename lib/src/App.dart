@@ -10,6 +10,9 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: OnBoardingScreen(),
       // home: RegistrationScreen(),
+      routes: <String, WidgetBuilder>{
+        '/register': (BuildContext context) => RegistrationScreen()
+      },
     );
   }
 }

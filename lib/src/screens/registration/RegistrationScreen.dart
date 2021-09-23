@@ -8,7 +8,7 @@ import 'package:jamiiclient/src/screens/registration/SuccessScreen.dart';
 
 class RegistrationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
-    final PageController pageController = PageController(initialPage: 5);
+    final PageController pageController = PageController(initialPage: 0);
 
     return Scaffold(
       body: Padding(
