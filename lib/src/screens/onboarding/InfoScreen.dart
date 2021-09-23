@@ -69,6 +69,7 @@ class InfoScreen extends StatelessWidget {
           style: TextStyle(
             fontSize: 23,
             fontWeight: FontWeight.w500,
+            color: Colors.purple,
           ),
         ),
         Container(margin: EdgeInsets.only(top: 15)),
@@ -93,7 +94,21 @@ class InfoScreen extends StatelessWidget {
         onPressed: () async {
           // Navigate to registration
         },
-        child: Text(buttonText),
+        child: Padding(
+          padding: EdgeInsets.all(5),
+          child: Text(buttonText),
+        ),
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all<Color>(
+            Colors.purple,
+          ),
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(18.0),
+              side: BorderSide(color: Colors.purple),
+            ),
+          ),
+        ),
       ),
     );
   }
