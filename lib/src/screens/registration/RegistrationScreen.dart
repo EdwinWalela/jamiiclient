@@ -7,8 +7,12 @@ import 'package:jamiiclient/src/screens/registration/Intro.dart';
 import 'package:jamiiclient/src/screens/registration/SuccessScreen.dart';
 
 class RegistrationScreen extends StatelessWidget {
+  final cameras;
+
+  RegistrationScreen({this.cameras});
+
   Widget build(BuildContext context) {
-    final PageController pageController = PageController(initialPage: 0);
+    final PageController pageController = PageController(initialPage: 1);
 
     return Scaffold(
       body: Padding(
@@ -20,10 +24,12 @@ class RegistrationScreen extends StatelessWidget {
           children: [
             Intro(pageController: pageController),
             Biometrics(
+                camera: this.cameras[0],
                 header: "Step 1: Take a photo of yourself",
                 isPotrait: true,
                 pageController: pageController),
             Biometrics(
+                camera: this.cameras[1],
                 header: "Step 2: Take a photo of your National ID",
                 isPotrait: false,
                 pageController: pageController),

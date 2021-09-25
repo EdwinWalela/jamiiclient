@@ -7,6 +7,8 @@ import 'dart:convert';
 import 'package:web_socket_channel/io.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
+import 'package:camera/camera.dart';
+
 void main() async {
   // final algorithim = Ed25519();
   // final keyPair = await algorithim.newKeyPair();
@@ -53,5 +55,16 @@ void main() async {
 
   // close channel
   // channel.sink.close();
-  runApp(App());
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Obtain a list of the available cameras on the device.
+  final cameras = await availableCameras();
+
+  // Get a specific camera from the list of available cameras.
+  final backCamera = cameras.first;
+  final frontCamera = cameras.last;
+
+  runApp(App(
+    cameras: [backCamera, frontCamera],
+  ));
 }
