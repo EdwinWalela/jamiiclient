@@ -76,10 +76,10 @@ class _BiometricsState extends State<Biometrics> {
   Widget buildImageFrame(BuildContext context) {
     return Container(
       width: this.widget.isPotrait
-          ? MediaQuery.of(context).size.width * 0.6
+          ? MediaQuery.of(context).size.width * 0.8
           : MediaQuery.of(context).size.width * 0.8,
       height: this.widget.isPotrait
-          ? MediaQuery.of(context).size.width * 0.6
+          ? MediaQuery.of(context).size.width * 0.8
           : MediaQuery.of(context).size.width * 0.5,
       decoration: BoxDecoration(
           // border: Border.all(color: Colors.black, width: 3),
@@ -99,7 +99,9 @@ class _BiometricsState extends State<Biometrics> {
             print(image.path);
             pageController.nextPage(
                 duration: Duration(milliseconds: 500), curve: Curves.easeInOut);
-          } catch (e) {}
+          } catch (e) {
+            print(e);
+          }
         },
         child: Text(buttonText),
       ),
