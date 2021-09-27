@@ -21,7 +21,7 @@ class Intro extends StatelessWidget {
           ],
         ),
         Container(margin: EdgeInsets.only(top: 50)),
-        buildButton("Get Started", pageController),
+        buildButton("Begin Registration", pageController),
       ],
     );
   }
@@ -52,6 +52,17 @@ class Intro extends StatelessWidget {
               duration: Duration(milliseconds: 500), curve: Curves.easeInOut);
         },
         child: Text(buttonText),
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all<Color>(
+            Colors.purple,
+          ),
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(18.0),
+              side: BorderSide(color: Colors.purple),
+            ),
+          ),
+        ),
       ),
     );
   }

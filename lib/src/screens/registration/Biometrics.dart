@@ -100,16 +100,17 @@ class _BiometricsState extends State<Biometrics> {
 
   Widget buildButton(String buttonText, PageController pageController) {
     return SizedBox(
-      width: 200,
+      width: 120,
       child: ElevatedButton(
         onPressed: () async {
           try {
             Directory dir = await getApplicationDocumentsDirectory();
-            final path = join(dir.path, "selfie.jpg");
+
+            final path =
+                join(dir.path, "selfie-" + DateTime.now().toString() + ".jpg");
 
             await _initializeControllerFuture;
             await _controller.takePicture(path);
-            // print(image.path);
 
             await pageController.nextPage(
                 duration: Duration(milliseconds: 500), curve: Curves.easeInOut);
@@ -117,7 +118,25 @@ class _BiometricsState extends State<Biometrics> {
             print(e);
           }
         },
-        child: Text(buttonText),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(buttonText),
+            Container(margin: EdgeInsets.only(right: 5)),
+            Icon(Icons.camera),
+          ],
+        ),
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all<Color>(
+            Colors.purple,
+          ),
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(18.0),
+              side: BorderSide(color: Colors.purple),
+            ),
+          ),
+        ),
       ),
     );
   }
