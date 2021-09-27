@@ -33,7 +33,7 @@ class RegistrationScreen extends StatelessWidget {
                 header: "Step 2: Take a photo of your National ID",
                 isPotrait: false,
                 pageController: pageController),
-            CheckingScreen(),
+            CheckingScreen(pageController: pageController),
             DetailConfirmationScreen(
               header: "Step 3: Confirm Registration Details",
             ),

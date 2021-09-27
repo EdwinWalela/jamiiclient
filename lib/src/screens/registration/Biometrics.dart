@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:path/path.dart';
 
 class Biometrics extends StatefulWidget {
   final String header;
@@ -27,15 +31,21 @@ class _BiometricsState extends State<Biometrics> {
     super.initState();
     _controller = CameraController(
       widget.camera,
-      ResolutionPreset.high,
+      ResolutionPreset.medium,
     );
-
     _initializeControllerFuture = _controller.initialize();
   }
 
   @override
   void dispose() {
-    _controller.stopImageStream().then((value) => _controller.dispose());
+    // try {
+    //   _controller
+    //       .stopImageStream()
+    //       .then((value) => _controller.dispose())
+    //       .catchError((e) => {print(e)});
+    // } catch (e) {
+    //   print(e);
+    // }
     super.dispose();
   }
 
@@ -94,10 +104,14 @@ class _BiometricsState extends State<Biometrics> {
       child: ElevatedButton(
         onPressed: () async {
           try {
+            Directory dir = await getApplicationDocumentsDirectory();
+            final path = join(dir.path, "selfie.jpg");
+
             await _initializeControllerFuture;
-            final image = await _controller.takePicture();
-            print(image.path);
-            pageController.nextPage(
+            await _controller.takePicture(path);
+            // print(image.path);
+
+            await pageController.nextPage(
                 duration: Duration(milliseconds: 500), curve: Curves.easeInOut);
           } catch (e) {
             print(e);

@@ -2,6 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CheckingScreen extends StatelessWidget {
+  final PageController pageController;
+
+  CheckingScreen({this.pageController});
+
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
