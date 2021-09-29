@@ -27,7 +27,10 @@ class BiometricsBloc {
     final Biometrics bioData =
         Biometrics(selfiePath: selfiePath, idCardPath: idPath);
 
+    // recieve response from API
     await _repository.verifyBiometrics(bioData);
+
+    // Add response to response stream
   }
 
   dispose() {

@@ -14,7 +14,7 @@ class RegistrationScreen extends StatelessWidget {
   RegistrationScreen({this.cameras});
 
   Widget build(BuildContext context) {
-    final PageController pageController = PageController(initialPage: 1);
+    final PageController pageController = PageController(initialPage: 4);
     final BiometricsBloc biometricsBloc = BiometricsProvider.of(context);
 
     return Scaffold(
@@ -40,6 +40,7 @@ class RegistrationScreen extends StatelessWidget {
               pageController: pageController,
               biometricsBloc: biometricsBloc,
             ),
+            // Listen to response stream for data
             CheckingScreen(
               pageController: pageController,
             ),

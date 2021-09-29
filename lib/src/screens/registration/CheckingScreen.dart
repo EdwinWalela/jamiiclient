@@ -1,10 +1,12 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CheckingScreen extends StatelessWidget {
   final PageController pageController;
 
   CheckingScreen({this.pageController});
+
+  // Stream builder to listen for response stream
+  // change page on data9
 
   Widget build(BuildContext context) {
     return Column(

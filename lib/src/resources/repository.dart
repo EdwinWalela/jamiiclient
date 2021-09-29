@@ -12,7 +12,7 @@ class Repository {
     var parsedJson = jsonDecode(res);
 
     Biometrics bio = Biometrics.fromJson(parsedJson);
-    print(bio.missingFaces);
+    // Return hard corded ids
     // var data = R"ce7fbc8d-f155-41a4-bfac-f994bd251188","3d65d1c5-0cab-476d-b808-7c49a7921afc"
     return "";
   }
