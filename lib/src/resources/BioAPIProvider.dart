@@ -1,8 +1,5 @@
 import 'package:http/http.dart';
 import 'package:jamiiclient/src/models/Biometrics.dart';
-import 'dart:io';
-import 'package:path/path.dart';
-import 'package:async/async.dart';
 
 class BioAPIProvider {
   Client client = Client();
