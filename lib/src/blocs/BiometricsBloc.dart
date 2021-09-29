@@ -30,9 +30,15 @@ class BiometricsBloc {
         Biometrics(selfiePath: selfiePath, idCardPath: idPath);
 
     // recieve response from API
-    await _repository.verifyBiometrics(bioData);
-
+    final res = await _repository.verifyBiometrics(bioData);
+    final user = User(
+      faceMatch: res.missingFaces.isEmpty,
+      idNo: "36914130",
+      sex: "male",
+      dob: "26/09/1999",
+    );
     // Add response to response stream
+    addUser(user);
   }
 
   dispose() {
