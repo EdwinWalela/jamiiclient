@@ -4,8 +4,9 @@ import 'package:jamiiclient/src/models/User.dart';
 class DetailConfirmationScreen extends StatelessWidget {
   final String header;
   final User user;
+  final PageController pageController;
 
-  DetailConfirmationScreen({this.header, this.user});
+  DetailConfirmationScreen({this.header, this.user, this.pageController});
 
   Widget build(BuildContext context) {
     return Column(
@@ -82,7 +83,16 @@ class DetailConfirmationScreen extends StatelessWidget {
     return SizedBox(
       width: 200,
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          if (allValid) {
+          } else {
+            pageController.animateToPage(
+              1,
+              duration: Duration(milliseconds: 500),
+              curve: Curves.easeInOut,
+            );
+          }
+        },
         child: Text(allValid ? "Submit" : "Re-take photo"),
       ),
     );

@@ -49,6 +49,7 @@ class RegistrationScreen extends StatelessWidget {
                   return DetailConfirmationScreen(
                     header: "Step 3: Confirm Registration Details",
                     user: snapshot.data,
+                    pageController: pageController,
                   );
                 } else {
                   return CheckingScreen(
