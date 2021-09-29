@@ -24,16 +24,19 @@ class RegistrationScreen extends StatelessWidget {
           children: [
             Intro(pageController: pageController),
             Biometrics(
-                camera: this.cameras[1],
-                header: "Step 1: Take a photo of yourself",
-                isPotrait: true,
-                pageController: pageController),
+              camera: this.cameras[1],
+              header: "Step 1: Take a photo of yourself",
+              isPotrait: true,
+              pageController: pageController,
+            ),
             Biometrics(
                 camera: this.cameras[0],
                 header: "Step 2: Take a photo of your National ID",
                 isPotrait: false,
                 pageController: pageController),
-            CheckingScreen(pageController: pageController),
+            CheckingScreen(
+              pageController: pageController,
+            ),
             DetailConfirmationScreen(
               header: "Step 3: Confirm Registration Details",
             ),
