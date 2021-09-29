@@ -10,7 +10,7 @@ class BiometricsBloc {
   final _repository = Repository();
   final _selfie = BehaviorSubject<String>();
   final _idCard = BehaviorSubject<String>();
-  final _responseStream = BehaviourSubject<User>();
+  final _responseStream = BehaviorSubject<User>();
 
   // Getters
   Function(String) get addSelfie => _selfie.sink.add;
@@ -38,5 +38,6 @@ class BiometricsBloc {
   dispose() {
     _selfie.close();
     _idCard.close();
+    _responseStream.close();
   }
 }
