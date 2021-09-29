@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:jamiiclient/src/blocs/BiometricsBloc.dart';
+import 'package:jamiiclient/src/blocs/biometricsBlocProvider.dart';
 import 'package:jamiiclient/src/screens/registration/Biometrics.dart';
 import 'package:jamiiclient/src/screens/registration/CheckingScreen.dart';
 import 'package:jamiiclient/src/screens/registration/DetailConfirmationScreen.dart';
@@ -13,6 +15,7 @@ class RegistrationScreen extends StatelessWidget {
 
   Widget build(BuildContext context) {
     final PageController pageController = PageController(initialPage: 1);
+    final BiometricsBloc biometricsBloc = BiometricsProvider.of(context);
 
     return Scaffold(
       body: Padding(
@@ -28,12 +31,15 @@ class RegistrationScreen extends StatelessWidget {
               header: "Step 1: Take a photo of yourself",
               isPotrait: true,
               pageController: pageController,
+              biometricsBloc: biometricsBloc,
             ),
             Biometrics(
-                camera: this.cameras[0],
-                header: "Step 2: Take a photo of your National ID",
-                isPotrait: false,
-                pageController: pageController),
+              camera: this.cameras[0],
+              header: "Step 2: Take a photo of your National ID",
+              isPotrait: false,
+              pageController: pageController,
+              biometricsBloc: biometricsBloc,
+            ),
             CheckingScreen(
               pageController: pageController,
             ),

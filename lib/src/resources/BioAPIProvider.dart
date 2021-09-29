@@ -10,7 +10,7 @@ class BioAPIProvider {
 
     var request = MultipartRequest("POST", url);
 
-    var selfie = await MultipartFile.fromPath("selfie", bioData.selfiePath);
+    var selfie = await MultipartFile.fromPath("face", bioData.selfiePath);
     var id = await MultipartFile.fromPath("id", bioData.idCardPath);
 
     request.files.add(selfie);

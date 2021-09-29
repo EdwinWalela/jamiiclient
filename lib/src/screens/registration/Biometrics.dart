@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
+import 'package:jamiiclient/src/blocs/BiometricsBloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 
@@ -10,12 +11,14 @@ class Biometrics extends StatefulWidget {
   final bool isPotrait;
   final PageController pageController;
   final camera;
+  final BiometricsBloc biometricsBloc;
 
   Biometrics({
     this.header,
     this.isPotrait,
     this.pageController,
     this.camera,
+    this.biometricsBloc,
   });
 
   @override
@@ -62,7 +65,8 @@ class _BiometricsState extends State<Biometrics> {
               Container(margin: EdgeInsets.only(top: 40)),
               buildImageFrame(context),
               Container(margin: EdgeInsets.only(top: 40)),
-              buildButton("Capture", widget.pageController),
+              buildButton("Capture", widget.pageController, widget.isPotrait,
+                  widget.biometricsBloc),
             ],
           );
         } else {
@@ -99,19 +103,31 @@ class _BiometricsState extends State<Biometrics> {
     );
   }
 
-  Widget buildButton(String buttonText, PageController pageController) {
+  Widget buildButton(String buttonText, PageController pageController,
+      bool isPortrait, BiometricsBloc bloc) {
     return SizedBox(
       width: 120,
       child: ElevatedButton(
         onPressed: () async {
           try {
             Directory dir = await getApplicationDocumentsDirectory();
-
-            final path =
-                join(dir.path, "selfie-" + DateTime.now().toString() + ".jpg");
+            final type = isPortrait ? "selfie" : "id";
+            final path = join(
+              dir.path,
+              type + DateTime.now().toString() + ".jpg",
+            );
 
             await _initializeControllerFuture;
             await _controller.takePicture(path);
+
+            if (isPortrait) {
+              // Selfie
+              bloc.addSelfie(path);
+            } else {
+              // ID
+              bloc.addId(path);
+              bloc.submit();
+            }
 
             await pageController.nextPage(
                 duration: Duration(milliseconds: 500), curve: Curves.easeInOut);
