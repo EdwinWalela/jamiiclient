@@ -47,6 +47,7 @@ class _BiometricsState extends State<Biometrics> {
     //   print(e);
     // }
     super.dispose();
+    // _controller.dispose();
   }
 
   Widget build(BuildContext context) {

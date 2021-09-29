@@ -13,8 +13,8 @@ class App extends StatelessWidget {
       // theme: ThemeData(colorScheme: ColorScheme(background: Colors.white,)),
       title: "Jamii",
       debugShowCheckedModeBanner: false,
-      home: OnBoardingScreen(),
-      // home: RegistrationScreen(cameras: this.cameras),
+      // home: OnBoardingScreen(),
+      home: RegistrationScreen(cameras: this.cameras),
       routes: <String, WidgetBuilder>{
         '/register': (BuildContext context) => RegistrationScreen(
               cameras: this.cameras,
