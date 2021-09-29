@@ -3,7 +3,7 @@ import 'package:jamiiclient/src/models/Biometrics.dart';
 
 class BioAPIProvider {
   Client client = Client();
-  String _baseURL = "https://d9eb-197-237-160-234.ngrok.io";
+  String _baseURL = "https://dc10-197-237-160-234.ngrok.io";
 
   Future<String> detectFaces(Biometrics bioData) async {
     var url = Uri.parse('$_baseURL/detect');

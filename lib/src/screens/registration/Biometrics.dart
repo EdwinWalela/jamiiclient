@@ -130,7 +130,9 @@ class _BiometricsState extends State<Biometrics> {
             }
 
             await pageController.nextPage(
-                duration: Duration(milliseconds: 500), curve: Curves.easeInOut);
+              duration: Duration(milliseconds: 500),
+              curve: Curves.easeInOut,
+            );
           } catch (e) {
             print(e);
           }

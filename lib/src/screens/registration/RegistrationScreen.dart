@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:jamiiclient/src/blocs/BiometricsBloc.dart';
 import 'package:jamiiclient/src/blocs/biometricsBlocProvider.dart';
+import 'package:jamiiclient/src/models/User.dart';
 import 'package:jamiiclient/src/screens/registration/Biometrics.dart';
 import 'package:jamiiclient/src/screens/registration/CheckingScreen.dart';
 import 'package:jamiiclient/src/screens/registration/DetailConfirmationScreen.dart';
@@ -14,7 +15,7 @@ class RegistrationScreen extends StatelessWidget {
   RegistrationScreen({this.cameras});
 
   Widget build(BuildContext context) {
-    final PageController pageController = PageController(initialPage: 4);
+    final PageController pageController = PageController(initialPage: 1);
     final BiometricsBloc biometricsBloc = BiometricsProvider.of(context);
 
     return Scaffold(
@@ -41,12 +42,22 @@ class RegistrationScreen extends StatelessWidget {
               biometricsBloc: biometricsBloc,
             ),
             // Listen to response stream for data
-            CheckingScreen(
-              pageController: pageController,
+            StreamBuilder(
+              stream: biometricsBloc.user,
+              builder: (BuildContext context, AsyncSnapshot<User> snapshot) {
+                if (snapshot.hasData) {
+                  return DetailConfirmationScreen(
+                    header: "Step 3: Confirm Registration Details",
+                    user: snapshot.data,
+                  );
+                } else {
+                  return CheckingScreen(
+                    pageController: pageController,
+                  );
+                }
+              },
             ),
-            DetailConfirmationScreen(
-              header: "Step 3: Confirm Registration Details",
-            ),
+
             SuccessScreen(),
           ],
         ),

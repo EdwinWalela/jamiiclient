@@ -33,6 +33,7 @@ class BiometricsBloc {
     final res = await _repository.verifyBiometrics(bioData);
     final user = User(
       faceMatch: res.missingFaces.isEmpty,
+      name: "Edwin Walela",
       idNo: "36914130",
       sex: "male",
       dob: "26/09/1999",

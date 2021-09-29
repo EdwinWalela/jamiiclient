@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:jamiiclient/src/models/User.dart';
 
 class DetailConfirmationScreen extends StatelessWidget {
   final String header;
+  final User user;
 
-  DetailConfirmationScreen({this.header});
+  DetailConfirmationScreen({this.header, this.user});
 
   Widget build(BuildContext context) {
     return Column(
@@ -20,12 +22,14 @@ class DetailConfirmationScreen extends StatelessWidget {
             Container(margin: EdgeInsets.only(right: 20)),
           ],
         ),
-        buildDetail("Face Match", false, ""),
-        buildDetail("ID No:", true, "36914130"),
-        buildDetail("Name:", true, "Edwin Walela"),
-        buildDetail("Sex:", true, "Male"),
-        buildDetail("DOB:", true, "26/09/1999"),
-        Container(margin: EdgeInsets.only(top: 40)),
+        buildDetail("Face Match", user.faceMatch, ""),
+        buildDetail("ID No:", true, user.idNo),
+        buildDetail("Name:", true, user.name),
+        buildDetail("Sex:", true, user.sex),
+        buildDetail("DOB:", true, user.dob),
+        Container(
+          margin: EdgeInsets.only(top: 40),
+        ),
         buildButton(false),
       ],
     );
