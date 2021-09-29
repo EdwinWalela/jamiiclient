@@ -6,4 +6,6 @@ class User {
   String dob;
 
   User({this.faceMatch, this.idNo, this.dob, this.name, this.sex});
+
+  User.fromJson(parsedJson) {}
 }

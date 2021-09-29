@@ -21,4 +21,18 @@ class BioAPIProvider {
     var res = String.fromCharCodes(resData);
     return res;
   }
+
+  Future<String> verifyFaces(Biometrics bioData) async {
+    // Send IDs for face match verification
+    var url = Uri.parse('$_baseURL/verify');
+    final res = await client.post(
+      url,
+      body: {
+        "face1": bioData.cardID,
+        "face2": bioData.selfieID,
+      },
+    );
+
+    return res.body;
+  }
 }
