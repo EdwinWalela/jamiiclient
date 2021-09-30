@@ -34,7 +34,7 @@ class _BiometricsState extends State<Biometrics> {
     super.initState();
     _controller = CameraController(
       widget.camera,
-      ResolutionPreset.medium,
+      ResolutionPreset.veryHigh,
     );
     _initializeControllerFuture = _controller.initialize();
   }
@@ -62,9 +62,9 @@ class _BiometricsState extends State<Biometrics> {
             children: [
               Container(margin: EdgeInsets.only(top: 20)),
               buildHeader(widget.header),
-              Container(margin: EdgeInsets.only(top: 40)),
+              Container(margin: EdgeInsets.only(top: 20)),
               buildImageFrame(context),
-              Container(margin: EdgeInsets.only(top: 40)),
+              Container(margin: EdgeInsets.only(top: 10)),
               buildButton("Capture", widget.pageController, widget.isPotrait,
                   widget.biometricsBloc),
             ],
@@ -90,12 +90,8 @@ class _BiometricsState extends State<Biometrics> {
 
   Widget buildImageFrame(BuildContext context) {
     return Container(
-      width: this.widget.isPotrait
-          ? MediaQuery.of(context).size.width * 0.8
-          : MediaQuery.of(context).size.width * 0.8,
-      height: this.widget.isPotrait
-          ? MediaQuery.of(context).size.width * 0.8
-          : MediaQuery.of(context).size.width * 0.5,
+      width: MediaQuery.of(context).size.width * 0.9,
+      height: MediaQuery.of(context).size.height * 0.7,
       decoration: BoxDecoration(
           // border: Border.all(color: Colors.black, width: 3),
           ),
