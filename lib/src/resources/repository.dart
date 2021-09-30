@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:jamiiclient/src/models/Biometrics.dart';
+import 'package:jamiiclient/src/models/User.dart';
 import 'package:jamiiclient/src/resources/BioAPIProvider.dart';
 
 class Repository {
@@ -12,16 +13,25 @@ class Repository {
     var parsedJson = jsonDecode(res);
 
     Biometrics bio = Biometrics.fromJson(parsedJson);
-    // Return hard corded ids
-    // var data = R"ce7fbc8d-f155-41a4-bfac-f994bd251188","3d65d1c5-0cab-476d-b808-7c49a7921afc"
+    // User user = User.fromJson(parsedJson);
+    User user = User(
+      idNo: "36914130",
+      dob: "26/09/1999",
+      name: "Edwin Walela",
+      sex: "male",
+    );
+
+    bio.user = user;
+
     return bio;
   }
 
   Future<User> verifyBiometrics(Biometrics bioData) async {
     final res = await bioAPIProvider.verifyFaces(bioData);
-
     var parsedJson = jsonDecode(res);
+    User user = bioData.user;
+    user.faceMatch = parsedJson["match"] == true;
 
-    User user = User
+    return user;
   }
 }

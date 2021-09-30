@@ -31,7 +31,7 @@ class DetailConfirmationScreen extends StatelessWidget {
         Container(
           margin: EdgeInsets.only(top: 40),
         ),
-        buildButton(false),
+        buildButton(user.faceMatch),
       ],
     );
   }
@@ -85,6 +85,10 @@ class DetailConfirmationScreen extends StatelessWidget {
       child: ElevatedButton(
         onPressed: () {
           if (allValid) {
+            pageController.nextPage(
+              duration: Duration(milliseconds: 500),
+              curve: Curves.easeInOut,
+            );
           } else {
             pageController.animateToPage(
               1,

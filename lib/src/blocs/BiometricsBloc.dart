@@ -30,16 +30,11 @@ class BiometricsBloc {
         Biometrics(selfiePath: selfiePath, idCardPath: idPath);
 
     // recieve response from API
-    final res = await _repository.extractBiometrics(bioData);
-    final user = User(
-      faceMatch: res.missingFaces.isNotEmpty,
-      name: "Edwin Walela",
-      idNo: "36914130",
-      sex: "male",
-      dob: "26/09/1999",
-    );
+    final extractionRes = await _repository.extractBiometrics(bioData);
+
+    final matchRes = await _repository.verifyBiometrics(extractionRes);
     // Add response to response stream
-    addUser(user);
+    addUser(matchRes);
   }
 
   dispose() {
