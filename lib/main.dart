@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cryptography/cryptography.dart';
 import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
@@ -55,6 +57,9 @@ void main() async {
 
   // close channel
   // channel.sink.close();
+
+  HttpOverrides.global = new MyHttpOverrides();
+
   WidgetsFlutterBinding.ensureInitialized();
 
   // Obtain a list of the available cameras on the device.
@@ -67,4 +72,13 @@ void main() async {
   runApp(App(
     cameras: [backCamera, frontCamera],
   ));
+}
+
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+  }
 }

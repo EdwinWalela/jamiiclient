@@ -91,7 +91,7 @@ class _BiometricsState extends State<Biometrics> {
   Widget buildImageFrame(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width * 0.9,
-      height: MediaQuery.of(context).size.height * 0.7,
+      height: MediaQuery.of(context).size.height * 0.65,
       decoration: BoxDecoration(
           // border: Border.all(color: Colors.black, width: 3),
           ),
