@@ -74,9 +74,7 @@ class InfoScreen extends StatelessWidget {
         Container(margin: EdgeInsets.only(top: 15)),
         Text(
           subtitle,
-          style: TextStyle(
-            fontSize: 17,
-          ),
+          style: TextStyle(fontSize: 17, color: Colors.black),
         ),
       ],
     );

@@ -9,9 +9,9 @@ class Repository {
 
   Future<Biometrics> extractBiometrics(Biometrics bioData) async {
     final res = await bioAPIProvider.detectFaces(bioData);
-
+    print(res);
     var parsedJson = jsonDecode(res);
-
+    print(parsedJson);
     Biometrics bio = Biometrics.fromJson(parsedJson);
     // User user = User.fromJson(parsedJson);
     User user = User(

@@ -9,6 +9,7 @@ class Biometrics {
   String selfiePath;
   String idCardPath;
   User user;
+  List<String> extractedText;
 
   Biometrics({
     this.selfieID,
@@ -26,5 +27,8 @@ class Biometrics {
     missingFaces = List.castFrom<dynamic, String>(
       parsedJson["missing-face"],
     );
+    // extractedText = List.castFrom<dynamic, String>(
+    //   parsedJson["extracted-text"],
+    // );
   }
 }
