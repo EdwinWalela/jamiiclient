@@ -68,7 +68,6 @@ void main() async {
   // Get a specific camera from the list of available cameras.
   final backCamera = cameras.first;
   final frontCamera = cameras.last;
-
   runApp(App(
     cameras: [backCamera, frontCamera],
   ));

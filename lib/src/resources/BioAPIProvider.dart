@@ -1,11 +1,12 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:http/http.dart';
 import 'package:jamiiclient/src/models/Biometrics.dart';
 
 class BioAPIProvider {
   Client client = Client();
-  String _baseURL = "https://b65b-197-237-160-234.ngrok.io";
+  String _baseURL = "https://jamii-bio-api.herokuapp.com";
 
   Future<String> detectFaces(Biometrics bioData) async {
     var url = Uri.parse('$_baseURL/detect');
@@ -25,7 +26,6 @@ class BioAPIProvider {
     } catch (err) {
       print(err);
     }
-
     try {
       resData = await response.stream.toBytes();
     } catch (err) {

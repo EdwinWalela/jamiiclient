@@ -15,7 +15,7 @@ class RegistrationScreen extends StatelessWidget {
   RegistrationScreen({this.cameras});
 
   Widget build(BuildContext context) {
-    final PageController pageController = PageController(initialPage: 0);
+    final PageController pageController = PageController(initialPage: 1);
     final BiometricsBloc biometricsBloc = BiometricsProvider.of(context);
 
     return Scaffold(

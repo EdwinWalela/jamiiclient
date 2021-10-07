@@ -31,7 +31,6 @@ class BiometricsBloc {
 
     // recieve response from API
     final extractionRes = await _repository.extractBiometrics(bioData);
-
     final matchRes = await _repository.verifyBiometrics(extractionRes);
     // Add response to response stream
     addUser(matchRes);

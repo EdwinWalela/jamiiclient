@@ -24,16 +24,24 @@ class DetailConfirmationScreen extends StatelessWidget {
           ],
         ),
         buildDetail("Face Match", user.faceMatch, ""),
-        buildDetail("ID No:", true, user.idNo),
-        buildDetail("Name:", true, user.name),
-        buildDetail("Sex:", true, user.sex),
-        buildDetail("DOB:", true, user.dob),
+        buildDetail("ID No:", user.idNo.isNotEmpty, user.idNo),
+        buildDetail("Name:", user.name.isNotEmpty, user.name),
+        buildDetail("Sex:", user.sex.isNotEmpty, user.sex),
+        buildDetail("DOB:", user.dob.isNotEmpty, user.dob),
         Container(
           margin: EdgeInsets.only(top: 40),
         ),
-        buildButton(user.faceMatch),
+        buildButton(checkAllValid(user)),
       ],
     );
+  }
+
+  bool checkAllValid(User user) {
+    return user.faceMatch &&
+        user.idNo.isNotEmpty &&
+        user.name.isNotEmpty &&
+        user.sex.isNotEmpty &&
+        user.dob.isNotEmpty;
   }
 
   Widget buildHeader(String header) {
@@ -68,7 +76,7 @@ class DetailConfirmationScreen extends StatelessWidget {
           ),
           Container(margin: EdgeInsets.only(right: 10)),
           Text(
-            content + " " + value,
+            isValid ? content + " " + value : content + " " + "N/A",
             style: TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.w500,
@@ -97,7 +105,7 @@ class DetailConfirmationScreen extends StatelessWidget {
             );
           }
         },
-        child: Text(allValid ? "Submit" : "Re-take photo"),
+        child: Text(allValid ? "Submit" : "Re-take photos"),
       ),
     );
   }

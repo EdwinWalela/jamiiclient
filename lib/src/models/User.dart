@@ -4,8 +4,16 @@ class User {
   String name;
   String sex;
   String dob;
+  List<String> extracted;
 
-  User({this.faceMatch, this.idNo, this.dob, this.name, this.sex});
+  User({
+    this.faceMatch,
+    this.idNo,
+    this.dob,
+    this.name,
+    this.sex,
+    this.extracted,
+  });
 
   User.fromJson(parsedJson) {
     faceMatch = parsedJson["match"];

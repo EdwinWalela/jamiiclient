@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:jamiiclient/src/models/Biometrics.dart';
 import 'package:jamiiclient/src/models/User.dart';
 import 'package:jamiiclient/src/resources/BioAPIProvider.dart';
@@ -9,19 +8,30 @@ class Repository {
 
   Future<Biometrics> extractBiometrics(Biometrics bioData) async {
     final res = await bioAPIProvider.detectFaces(bioData);
-    print(res);
-    var parsedJson = jsonDecode(res);
-    print(parsedJson);
-    Biometrics bio = Biometrics.fromJson(parsedJson);
-    // User user = User.fromJson(parsedJson);
-    User user = User(
-      idNo: "36914130",
-      dob: "26/09/1999",
-      name: "Edwin Walela",
-      sex: "male",
-    );
 
-    bio.user = user;
+    var parsedJson = jsonDecode(res);
+
+    Biometrics bio = Biometrics.fromJson(parsedJson);
+    User user;
+
+    if (bio.extractedText.length == 8) {
+      user = User(
+        idNo: bio.extractedText[1],
+        dob: bio.extractedText[3],
+        name: bio.extractedText[2],
+        sex: bio.extractedText[4],
+      );
+      bio.user = user;
+    } else {
+      bio.user = User(
+        faceMatch: false,
+        idNo: "",
+        dob: "",
+        name: "",
+        sex: "",
+        extracted: bio.extractedText,
+      );
+    }
 
     return bio;
   }

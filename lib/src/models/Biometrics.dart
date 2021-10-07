@@ -27,8 +27,8 @@ class Biometrics {
     missingFaces = List.castFrom<dynamic, String>(
       parsedJson["missing-face"],
     );
-    // extractedText = List.castFrom<dynamic, String>(
-    //   parsedJson["extracted-text"],
-    // );
+    extractedText = List.castFrom<dynamic, String>(
+      parsedJson["extracted-text"],
+    );
   }
 }
