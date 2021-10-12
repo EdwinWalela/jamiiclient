@@ -20,7 +20,18 @@ class BiometricsBloc {
   Stream<String> get idCard => _idCard.stream;
 
   Function(User) get addUser => _responseStream.sink.add;
-  Stream<User> get user => _responseStream.stream;
+  Stream<User> get user =>
+      _responseStream.stream.transform(biometricsValidation);
+
+  final biometricsValidation = StreamTransformer<User, User>.fromHandlers(
+    handleData: (user, sink) {
+      if (user.idNo.isEmpty) {
+        sink.addError("Missing details");
+      } else {
+        sink.add(user);
+      }
+    },
+  );
 
   submit() async {
     final selfiePath = _selfie.value;
@@ -31,9 +42,24 @@ class BiometricsBloc {
 
     // recieve response from API
     final extractionRes = await _repository.extractBiometrics(bioData);
-    final matchRes = await _repository.verifyBiometrics(extractionRes);
-    // Add response to response stream
-    addUser(matchRes);
+    var matchRes;
+
+    if (extractionRes.selfieID.isNotEmpty && extractionRes.cardID.isNotEmpty) {
+      matchRes = await _repository.verifyBiometrics(extractionRes);
+      // Add response to response stream
+      addUser(matchRes);
+    } else {
+      addUser(
+        User(
+          dob: "",
+          faceMatch: false,
+          idNo: "",
+          name: "",
+          sex: "",
+          extracted: [""],
+        ),
+      );
+    }
   }
 
   dispose() {

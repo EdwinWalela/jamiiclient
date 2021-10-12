@@ -51,6 +51,19 @@ class RegistrationScreen extends StatelessWidget {
                     user: snapshot.data,
                     pageController: pageController,
                   );
+                } else if (snapshot.hasError) {
+                  return DetailConfirmationScreen(
+                    header: "Step 3: Confirm Registration Details",
+                    user: User(
+                      dob: "",
+                      faceMatch: false,
+                      idNo: "",
+                      name: "",
+                      sex: "",
+                      extracted: [""],
+                    ),
+                    pageController: pageController,
+                  );
                 } else {
                   return CheckingScreen(
                     pageController: pageController,

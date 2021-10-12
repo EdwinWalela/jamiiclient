@@ -30,13 +30,15 @@ class App extends StatelessWidget {
       ),
       title: "Jamii",
       debugShowCheckedModeBanner: false,
-      // home: OnBoardingScreen(),
-      home: BiometricsProvider(
-        child: RegistrationScreen(cameras: this.cameras),
-      ),
+      home: OnBoardingScreen(),
+      // home: BiometricsProvider(
+      // child: RegistrationScreen(cameras: this.cameras),
+      // ),
       routes: <String, WidgetBuilder>{
-        '/register': (BuildContext context) => RegistrationScreen(
-              cameras: this.cameras,
+        '/register': (BuildContext context) => BiometricsProvider(
+              child: RegistrationScreen(
+                cameras: this.cameras,
+              ),
             )
       },
     );
