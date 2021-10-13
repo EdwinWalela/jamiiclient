@@ -40,13 +40,10 @@ void main() async {
   final keyPair = await algorithim.newKeyPairFromSeed(seed);
 
   final pubKey = await keyPair.extractPublicKey();
-  final privKey = await keyPair.extractPrivateKeyBytes();
+  // final privKey = await keyPair.extractPrivateKeyBytes();
 
   final pubKey64 = base64Encode(pubKey.bytes);
-  final privKey64 = base64Encode(privKey);
-
-  print(pubKey64);
-  print(privKey64);
+  // final privKey64 = base64Encode(privKey);
 
   // final timestamp = DateTime.now().millisecondsSinceEpoch.toString();
   // var _hash = "";
@@ -100,9 +97,12 @@ void main() async {
   // Get a specific camera from the list of available cameras.
   final backCamera = cameras.first;
   final frontCamera = cameras.last;
-  runApp(App(
-    cameras: [backCamera, frontCamera],
-  ));
+  runApp(
+    App(
+      cameras: [backCamera, frontCamera],
+      keyPair: keyPair,
+    ),
+  );
 }
 
 class MyHttpOverrides extends HttpOverrides {

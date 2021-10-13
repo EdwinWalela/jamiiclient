@@ -11,8 +11,9 @@ import 'package:jamiiclient/src/screens/registration/SuccessScreen.dart';
 
 class RegistrationScreen extends StatelessWidget {
   final cameras;
+  final keyPair;
 
-  RegistrationScreen({this.cameras});
+  RegistrationScreen({this.cameras, this.keyPair});
 
   Widget build(BuildContext context) {
     final PageController pageController = PageController(initialPage: 1);
@@ -50,12 +51,14 @@ class RegistrationScreen extends StatelessWidget {
                     header: "Step 3: Confirm Registration Details",
                     user: snapshot.data,
                     pageController: pageController,
+                    keyPair: this.keyPair,
                   );
                 } else if (snapshot.hasError) {
                   return DetailConfirmationScreen(
                     header: "Step 3: Confirm Registration Details",
                     user: null,
                     pageController: pageController,
+                    keyPair: this.keyPair,
                   );
                 } else {
                   return CheckingScreen(

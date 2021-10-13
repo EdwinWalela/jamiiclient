@@ -22,6 +22,7 @@ class Repository {
         sex: bio.extractedText[4],
         idPath: bioData.idCardPath,
         facePath: bioData.selfiePath,
+        extracted: bio.extractedText,
       );
       bio.user = user;
     } else {

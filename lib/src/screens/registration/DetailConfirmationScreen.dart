@@ -1,5 +1,8 @@
+import 'dart:convert';
 import 'dart:io';
 
+import 'package:crypto/crypto.dart';
+import 'package:cryptography/cryptography.dart';
 import 'package:flutter/material.dart';
 import 'package:jamiiclient/src/models/User.dart';
 
@@ -7,8 +10,14 @@ class DetailConfirmationScreen extends StatelessWidget {
   final String header;
   final User user;
   final PageController pageController;
+  final SimpleKeyPair keyPair;
 
-  DetailConfirmationScreen({this.header, this.user, this.pageController});
+  DetailConfirmationScreen({
+    this.header,
+    this.user,
+    this.pageController,
+    this.keyPair,
+  });
 
   Widget build(BuildContext context) {
     return Column(
@@ -118,8 +127,28 @@ class DetailConfirmationScreen extends StatelessWidget {
     return SizedBox(
       width: 200,
       child: ElevatedButton(
-        onPressed: () {
+        onPressed: () async {
           if (allValid) {
+            final algorithim = Ed25519();
+            final userData = user.extracted.join("").replaceAll(" ", "");
+            final extractedDetails = utf8.encode(userData);
+            // produce digest
+            final digest = sha512.convert(extractedDetails);
+            // sign extracted ID information with users keypair
+            final signature = await algorithim.sign(
+              utf8.encode(digest.toString()),
+              keyPair: keyPair,
+            );
+
+            final sig64 = base64Encode(signature.bytes);
+            final pubKey = await keyPair.extractPublicKey();
+            final pubKey64 = base64Encode(pubKey.bytes);
+
+            // Send signature and pubkey to node
+            // Add to sink
+            print(sig64);
+            print(pubKey64);
+
             pageController.nextPage(
               duration: Duration(milliseconds: 500),
               curve: Curves.easeInOut,
