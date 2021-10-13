@@ -10,7 +10,6 @@ class App extends StatelessWidget {
   App({this.cameras});
 
   Widget build(BuildContext context) {
-    print("hello world");
     return MaterialApp(
       theme: ThemeData(
         // Define the default brightness and colors.
@@ -30,10 +29,10 @@ class App extends StatelessWidget {
       ),
       title: "Jamii",
       debugShowCheckedModeBanner: false,
-      // home: OnBoardingScreen(),
-      home: BiometricsProvider(
-        child: RegistrationScreen(cameras: this.cameras),
-      ),
+      home: OnBoardingScreen(),
+      // home: BiometricsProvider(
+      //   child: RegistrationScreen(cameras: this.cameras),
+      // ),
       routes: <String, WidgetBuilder>{
         '/register': (BuildContext context) => BiometricsProvider(
               child: RegistrationScreen(

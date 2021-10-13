@@ -1,20 +1,53 @@
+import 'dart:ffi';
 import 'dart:io';
+import 'dart:math';
 
 import 'package:cryptography/cryptography.dart';
 import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
 import 'package:jamiiclient/src/App.dart';
 import 'dart:convert';
-
 import 'package:web_socket_channel/io.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import 'package:camera/camera.dart';
 
 void main() async {
-  // final algorithim = Ed25519();
-  // final keyPair = await algorithim.newKeyPair();
-  // final pubKey = await keyPair.extractPublicKey();
+  WidgetsFlutterBinding.ensureInitialized();
+  final secureStorage = FlutterSecureStorage();
+  final algorithim = Ed25519();
+
+  final storedSeed = await secureStorage.read(key: "seed");
+
+  var seed;
+
+  if (storedSeed != null) {
+    final readSeed = storedSeed.split(',');
+
+    seed = readSeed.map(int.parse).toList();
+  } else {
+    // Create and store new seed
+    final random = Random.secure();
+
+    seed = List<int>.generate(32, (i) => random.nextInt(256));
+
+    var seedString = seed.join(",");
+
+    await secureStorage.write(key: "seed", value: seedString);
+  }
+
+  final keyPair = await algorithim.newKeyPairFromSeed(seed);
+
+  final pubKey = await keyPair.extractPublicKey();
+  final privKey = await keyPair.extractPrivateKeyBytes();
+
+  final pubKey64 = base64Encode(pubKey.bytes);
+  final privKey64 = base64Encode(privKey);
+
+  print(pubKey64);
+  print(privKey64);
+
   // final timestamp = DateTime.now().millisecondsSinceEpoch.toString();
   // var _hash = "";
 
@@ -32,8 +65,7 @@ void main() async {
 
   // // encode64 signature
   // final sig64 = base64Encode(signature.bytes);
-  // //
-  // print(signature.bytes);
+
   // final data = "$digest|$sig64|$pub64|$pub64.$pub64.$pub64.$pub64|$timestamp";
   // final header = {
   //   "source": "client",
@@ -51,11 +83,11 @@ void main() async {
   // } on Exception {
   //   print("error");
   // }
-  // Send vote
+  // // Send vote
   // final channel = IOWebSocketChannel.connect("wss://93a8a7aee2d1.ngrok.io",
   //     headers: header);
 
-  // close channel
+  // // close channel
   // channel.sink.close();
 
   HttpOverrides.global = new MyHttpOverrides();
