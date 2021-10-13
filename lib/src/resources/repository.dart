@@ -20,6 +20,8 @@ class Repository {
         dob: bio.extractedText[3],
         name: bio.extractedText[2],
         sex: bio.extractedText[4],
+        idPath: bioData.idCardPath,
+        facePath: bioData.selfiePath,
       );
       bio.user = user;
     } else {
@@ -30,6 +32,8 @@ class Repository {
         name: "",
         sex: "",
         extracted: bio.extractedText,
+        idPath: "",
+        facePath: "",
       );
     }
 

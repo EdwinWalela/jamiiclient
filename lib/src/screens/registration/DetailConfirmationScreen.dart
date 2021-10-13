@@ -12,6 +12,19 @@ class DetailConfirmationScreen extends StatelessWidget {
 
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        user != null ? userValid(context) : noData(),
+        Container(
+          margin: EdgeInsets.only(top: 40),
+        ),
+        buildButton(user != null ? checkAllValid(user) : false),
+      ],
+    );
+  }
+
+  Widget userValid(BuildContext context) {
+    return Column(
       children: [
         Container(margin: EdgeInsets.only(top: 20)),
         buildHeader(this.header),
@@ -30,10 +43,14 @@ class DetailConfirmationScreen extends StatelessWidget {
         buildDetail("Name:", user.name.isNotEmpty, user.name),
         buildDetail("Sex:", user.sex.isNotEmpty, user.sex),
         buildDetail("DOB:", user.dob.isNotEmpty, user.dob),
-        Container(
-          margin: EdgeInsets.only(top: 40),
-        ),
-        buildButton(checkAllValid(user)),
+      ],
+    );
+  }
+
+  Widget noData() {
+    return Column(
+      children: [
+        Text("Unable To Extract Details"),
       ],
     );
   }
@@ -63,7 +80,14 @@ class DetailConfirmationScreen extends StatelessWidget {
       // decoration: BoxDecoration(
       //   border: Border.all(color: Colors.black, width: 2),
       // ),
-      child: path.isNotEmpty ? Image.file(File(path)) : Container(),
+      child: path.isNotEmpty
+          ? Image.file(
+              File(
+                path,
+              ),
+              scale: 2,
+            )
+          : Container(),
     );
   }
 

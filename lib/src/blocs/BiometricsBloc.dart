@@ -46,21 +46,22 @@ class BiometricsBloc {
 
     if (extractionRes.selfieID.isNotEmpty && extractionRes.cardID.isNotEmpty) {
       matchRes = await _repository.verifyBiometrics(extractionRes);
-      matchRes.facePath = extractionRes.selfiePath;
-      matchRes.idPath = extractionRes.idCardPath;
+      matchRes.facePath = selfiePath;
+      matchRes.idPath = idPath;
       // Add response to response stream
       addUser(matchRes);
     } else {
       addUser(
         User(
-            dob: "",
-            faceMatch: false,
-            idNo: "",
-            name: "",
-            sex: "",
-            extracted: [""],
-            facePath: extractionRes.selfiePath,
-            idPath: extractionRes.idCardPath),
+          dob: "",
+          faceMatch: false,
+          idNo: "",
+          name: "",
+          sex: "",
+          extracted: [""],
+          facePath: selfiePath,
+          idPath: idPath,
+        ),
       );
     }
   }
