@@ -26,7 +26,7 @@ class DetailConfirmationScreen extends StatelessWidget {
   Widget userValid(BuildContext context) {
     return Column(
       children: [
-        Container(margin: EdgeInsets.only(top: 20)),
+        Container(margin: EdgeInsets.only(top: 10)),
         buildHeader(this.header),
         Container(margin: EdgeInsets.only(top: 30)),
         Row(

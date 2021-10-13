@@ -34,6 +34,7 @@ class BiometricsBloc {
   );
 
   submit() async {
+    drainUserStream();
     final selfiePath = _selfie.value;
     final idPath = _idCard.value;
 
@@ -64,6 +65,10 @@ class BiometricsBloc {
         ),
       );
     }
+  }
+
+  drainUserStream() {
+    _responseStream.drain();
   }
 
   dispose() {
