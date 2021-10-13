@@ -5,6 +5,8 @@ class User {
   String sex;
   String dob;
   List<String> extracted;
+  String idPath;
+  String facePath;
 
   User({
     this.faceMatch,
@@ -13,6 +15,8 @@ class User {
     this.name,
     this.sex,
     this.extracted,
+    this.idPath,
+    this.facePath,
   });
 
   User.fromJson(parsedJson) {

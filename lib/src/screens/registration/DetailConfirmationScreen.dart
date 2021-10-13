@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:jamiiclient/src/models/User.dart';
 
@@ -17,9 +19,9 @@ class DetailConfirmationScreen extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            buildImageFrame(context),
+            buildImageFrame(context, user.idPath),
             Container(margin: EdgeInsets.only(right: 20)),
-            buildImageFrame(context),
+            buildImageFrame(context, user.facePath),
             Container(margin: EdgeInsets.only(right: 20)),
           ],
         ),
@@ -54,13 +56,14 @@ class DetailConfirmationScreen extends StatelessWidget {
     );
   }
 
-  Widget buildImageFrame(BuildContext context) {
+  Widget buildImageFrame(BuildContext context, String path) {
     return Container(
       width: MediaQuery.of(context).size.width * 0.35,
       height: MediaQuery.of(context).size.width * 0.35,
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.black, width: 2),
-      ),
+      // decoration: BoxDecoration(
+      //   border: Border.all(color: Colors.black, width: 2),
+      // ),
+      child: path.isNotEmpty ? Image.file(File(path)) : Container(),
     );
   }
 

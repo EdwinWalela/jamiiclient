@@ -42,22 +42,25 @@ class BiometricsBloc {
 
     // recieve response from API
     final extractionRes = await _repository.extractBiometrics(bioData);
-    var matchRes;
+    User matchRes;
 
     if (extractionRes.selfieID.isNotEmpty && extractionRes.cardID.isNotEmpty) {
       matchRes = await _repository.verifyBiometrics(extractionRes);
+      matchRes.facePath = extractionRes.selfiePath;
+      matchRes.idPath = extractionRes.idCardPath;
       // Add response to response stream
       addUser(matchRes);
     } else {
       addUser(
         User(
-          dob: "",
-          faceMatch: false,
-          idNo: "",
-          name: "",
-          sex: "",
-          extracted: [""],
-        ),
+            dob: "",
+            faceMatch: false,
+            idNo: "",
+            name: "",
+            sex: "",
+            extracted: [""],
+            facePath: extractionRes.selfiePath,
+            idPath: extractionRes.idCardPath),
       );
     }
   }

@@ -61,6 +61,8 @@ class RegistrationScreen extends StatelessWidget {
                       name: "",
                       sex: "",
                       extracted: [""],
+                      facePath: "",
+                      idPath: "",
                     ),
                     pageController: pageController,
                   );
