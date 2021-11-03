@@ -78,7 +78,12 @@ class Ballot extends StatelessWidget {
     return SizedBox(
       width: 120,
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () async {
+          await pageController.nextPage(
+            duration: Duration(milliseconds: 500),
+            curve: Curves.easeInOut,
+          );
+        },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

@@ -5,7 +5,7 @@ import 'package:jamiiclient/src/screens/voting/Intro.dart';
 
 class VotingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
-    final PageController pageController = PageController(initialPage: 1);
+    final PageController pageController = PageController(initialPage: 0);
 
     return Scaffold(
       body: Padding(
@@ -20,6 +20,16 @@ class VotingScreen extends StatelessWidget {
               pageController: pageController,
               ballotType: "Presidential",
               isPresidential: true,
+            ),
+            Ballot(
+              pageController: pageController,
+              ballotType: "Parliamentary",
+              isPresidential: false,
+            ),
+            Ballot(
+              pageController: pageController,
+              ballotType: "County Assembly Ward",
+              isPresidential: false,
             ),
           ],
         ),
