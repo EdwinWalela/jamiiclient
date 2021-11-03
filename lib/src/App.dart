@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:jamiiclient/src/blocs/biometricsBlocProvider.dart';
 import 'package:jamiiclient/src/screens/onboarding/OnboardingScreen.dart';
 import 'package:jamiiclient/src/screens/registration/RegistrationScreen.dart';
+import 'package:jamiiclient/src/screens/voting/Voting.dart';
 
 class App extends StatelessWidget {
   final cameras;
@@ -24,7 +25,8 @@ class App extends StatelessWidget {
       ),
       title: "Jamii",
       debugShowCheckedModeBanner: false,
-      home: OnBoardingScreen(),
+      // home: OnBoardingScreen(),
+      home: VotingScreen(),
       // home: BiometricsProvider(
       // child: RegistrationScreen(cameras: this.cameras,keyPair: this.keyPair,),
       // ),
