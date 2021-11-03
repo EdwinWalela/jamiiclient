@@ -16,7 +16,11 @@ class VotingScreen extends StatelessWidget {
           controller: pageController,
           children: [
             Intro(pageController: pageController),
-            Ballot(pageController: pageController),
+            Ballot(
+              pageController: pageController,
+              ballotType: "Presidential",
+              isPresidential: true,
+            ),
           ],
         ),
       ),
