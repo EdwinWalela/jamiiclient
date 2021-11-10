@@ -7,6 +7,7 @@ class Ballot extends StatelessWidget {
   final bool isPresidential;
   final String ballotType;
   final List<Candidate> candidates;
+
   Ballot({
     this.pageController,
     this.isPresidential,
@@ -71,10 +72,7 @@ class Ballot extends StatelessWidget {
     );
   }
 
-  Widget buildButton(
-    String buttonText,
-    PageController pageController,
-  ) {
+  Widget buildButton(String buttonText, PageController pageController) {
     return SizedBox(
       width: 120,
       child: ElevatedButton(
