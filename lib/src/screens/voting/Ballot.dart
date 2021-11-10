@@ -1,18 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:jamiiclient/src/models/Candidate.dart';
 
 class Ballot extends StatelessWidget {
   final PageController pageController;
   final bool isPresidential;
   final String ballotType;
-  final List<String> candidates = <String>[
-    'a',
-    'a',
-    'a',
-    'a',
-    'a',
-  ];
-  Ballot({this.pageController, this.isPresidential, this.ballotType});
+  final List<Candidate> candidates;
+  Ballot({
+    this.pageController,
+    this.isPresidential,
+    this.ballotType,
+    this.candidates,
+  });
 
   Widget build(BuildContext context) {
     return Column(
@@ -20,9 +20,9 @@ class Ballot extends StatelessWidget {
         buildHeader(this.ballotType),
         Expanded(
           child: ListView.builder(
-            itemCount: candidates.length,
+            itemCount: this.candidates.length,
             itemBuilder: (BuildContext context, int index) {
-              return buildCard(this.isPresidential);
+              return buildCard(this.isPresidential, this.candidates[index]);
             },
           ),
         ),
@@ -41,7 +41,7 @@ class Ballot extends StatelessWidget {
     );
   }
 
-  Widget buildCard(bool isPresidential) {
+  Widget buildCard(bool isPresidential, Candidate candidate) {
     return Card(
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -55,8 +55,8 @@ class Ballot extends StatelessWidget {
               Icons.check_box_outline_blank,
               size: 50,
             ),
-            title: Text('Candidate Name'),
-            subtitle: isPresidential ? Text('Deputy') : null,
+            title: Text(candidate.name),
+            subtitle: isPresidential ? Text(candidate.deputy) : null,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
