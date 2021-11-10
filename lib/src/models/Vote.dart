@@ -6,6 +6,8 @@ class Vote {
   Candidate county;
   String signature;
   String hash;
+  String pubKey64;
+  String timestamp;
 
   Vote({
     this.presidential,
@@ -13,5 +15,13 @@ class Vote {
     this.county,
     this.signature,
     this.hash,
+    this.pubKey64,
+    this.timestamp,
   });
+
+  @override
+  String toString() {
+    // final data = "$digest|$sig64|$pub64|$pub64.$pub64.$pub64.$pub64|$timestamp";
+    return "${this.hash}|${this.signature}|${this.pubKey64}|${this.presidential}|${this.parliamentary}|${this.county}|${this.timestamp}";
+  }
 }

@@ -23,6 +23,8 @@ class BallotBloc {
   Stream<Candidate> get county => _county.stream;
 
   submit() async {
+    final timestamp = DateTime.now().millisecondsSinceEpoch.toString();
+
     final presidentialCandidate = _presidential.value;
     final parliamentaryCandidate = _parliamentary.value;
     final countyCandidate = _county.value;
@@ -35,21 +37,26 @@ class BallotBloc {
     );
     final algorithim = Ed25519();
 
-    Digest digest = await hashVote(vote, keyPair);
+    Digest digest = await hashVote(vote, keyPair, timestamp);
 
     final signature = await algorithim.sign(digest.bytes, keyPair: keyPair);
 
     // // encode64 signature
     final sig64 = base64Encode(signature.bytes);
 
+    final pubKey = await keyPair.extractPublicKey();
+    final pub64 = base64Encode(pubKey.bytes);
+
     vote.signature = sig64;
     vote.hash = digest.toString();
+    vote.pubKey64 = pub64;
+    vote.timestamp = timestamp;
+    print("\n");
+    print(vote.toString());
   }
 
-  hashVote(Vote vote, SimpleKeyPair keyPair) async {
+  hashVote(Vote vote, SimpleKeyPair keyPair, String timestamp) async {
     final pubKey = await keyPair.extractPublicKey();
-
-    final timestamp = DateTime.now().millisecondsSinceEpoch.toString();
 
     var _hash = "";
 
