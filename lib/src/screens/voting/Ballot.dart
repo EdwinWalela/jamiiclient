@@ -42,6 +42,13 @@ class Ballot extends StatelessWidget {
     );
   }
 
+  Widget buildCheckBox(bool isChecked) {
+    return Checkbox(
+      value: isChecked,
+      onChanged: (bool value) {},
+    );
+  }
+
   Widget buildCard(bool isPresidential, Candidate candidate) {
     return Card(
       child: Column(
@@ -52,10 +59,7 @@ class Ballot extends StatelessWidget {
               Icons.person,
               size: 50,
             ),
-            trailing: Icon(
-              Icons.check_box_outline_blank,
-              size: 50,
-            ),
+            trailing: buildCheckBox(candidate.isChecked),
             title: Text(candidate.name),
             subtitle: isPresidential ? Text(candidate.deputy) : null,
           ),

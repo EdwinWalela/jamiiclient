@@ -9,24 +9,84 @@ class VotingScreen extends StatelessWidget {
     final PageController pageController = PageController(initialPage: 0);
 
     final List<Candidate> presidentialCandidates = [
-      Candidate(name: "Edwin", deputy: "Walela", image: "", position: 1),
-      Candidate(name: "Edwin", deputy: "Walela", image: "", position: 1),
-      Candidate(name: "Edwin", deputy: "Walela", image: "", position: 1),
-      Candidate(name: "Edwin", deputy: "Walela", image: "", position: 1),
+      Candidate(
+          name: "Edwin",
+          deputy: "Walela",
+          image: "",
+          position: 1,
+          isChecked: false),
+      Candidate(
+          name: "Edwin",
+          deputy: "Walela",
+          image: "",
+          position: 1,
+          isChecked: false),
+      Candidate(
+          name: "Edwin",
+          deputy: "Walela",
+          image: "",
+          position: 1,
+          isChecked: false),
+      Candidate(
+          name: "Edwin",
+          deputy: "Walela",
+          image: "",
+          position: 1,
+          isChecked: false),
     ];
 
     final List<Candidate> parliamentaryCandidates = [
-      Candidate(name: "Edwin", deputy: "Walela", image: "", position: 1),
-      Candidate(name: "Edwin", deputy: "Walela", image: "", position: 1),
-      Candidate(name: "Edwin", deputy: "Walela", image: "", position: 1),
-      Candidate(name: "Edwin", deputy: "Walela", image: "", position: 1),
+      Candidate(
+          name: "Edwin",
+          deputy: "Walela",
+          image: "",
+          position: 1,
+          isChecked: false),
+      Candidate(
+          name: "Edwin",
+          deputy: "Walela",
+          image: "",
+          position: 1,
+          isChecked: false),
+      Candidate(
+          name: "Edwin",
+          deputy: "Walela",
+          image: "",
+          position: 1,
+          isChecked: false),
+      Candidate(
+          name: "Edwin",
+          deputy: "Walela",
+          image: "",
+          position: 1,
+          isChecked: false),
     ];
 
     final List<Candidate> countyCandidates = [
-      Candidate(name: "Edwin", deputy: "Walela", image: "", position: 1),
-      Candidate(name: "Edwin", deputy: "Walela", image: "", position: 1),
-      Candidate(name: "Edwin", deputy: "Walela", image: "", position: 1),
-      Candidate(name: "Edwin", deputy: "Walela", image: "", position: 1),
+      Candidate(
+          name: "Edwin",
+          deputy: "Walela",
+          image: "",
+          position: 1,
+          isChecked: false),
+      Candidate(
+          name: "Edwin",
+          deputy: "Walela",
+          image: "",
+          position: 1,
+          isChecked: false),
+      Candidate(
+          name: "Edwin",
+          deputy: "Walela",
+          image: "",
+          position: 1,
+          isChecked: false),
+      Candidate(
+          name: "Edwin",
+          deputy: "Walela",
+          image: "",
+          position: 1,
+          isChecked: false),
     ];
 
     return Scaffold(
