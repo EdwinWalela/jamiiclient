@@ -106,7 +106,7 @@ class BallotBloc {
           isChecked: false),
     ];
 
-    List<Candidate> candidates;
+    List<Candidate> candidates = [];
 
     candidates.addAll(presidentialCandidates);
     candidates.addAll(parliamentaryCandidates);

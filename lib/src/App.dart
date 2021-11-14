@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:jamiiclient/src/blocs/BallotBlocProvider.dart';
 import 'package:jamiiclient/src/blocs/biometricsBlocProvider.dart';
 import 'package:jamiiclient/src/screens/onboarding/OnboardingScreen.dart';
 import 'package:jamiiclient/src/screens/registration/RegistrationScreen.dart';
@@ -26,7 +27,9 @@ class App extends StatelessWidget {
       title: "Jamii",
       debugShowCheckedModeBanner: false,
       // home: OnBoardingScreen(),
-      home: VotingScreen(),
+      home: BallotBlocProvider(
+        child: VotingScreen(),
+      ),
       // home: BiometricsProvider(
       // child: RegistrationScreen(cameras: this.cameras,keyPair: this.keyPair,),
       // ),
