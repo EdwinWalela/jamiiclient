@@ -29,22 +29,25 @@ class VotingScreen extends StatelessWidget {
                 children: [
                   Intro(pageController: pageController),
                   Ballot(
+                    bloc: bloc,
                     pageController: pageController,
                     ballotType: "Presidential",
                     isPresidential: true,
-                    candidates: snapshot.data,
+                    candidates: extractPresidential(snapshot.data),
                   ),
                   Ballot(
+                    bloc: bloc,
                     pageController: pageController,
                     ballotType: "Parliamentary",
                     isPresidential: false,
-                    candidates: snapshot.data,
+                    candidates: extractParliamentary(snapshot.data),
                   ),
                   Ballot(
+                    bloc: bloc,
                     pageController: pageController,
                     ballotType: "County Assembly Ward",
                     isPresidential: false,
-                    candidates: snapshot.data,
+                    candidates: extractCounty(snapshot.data),
                   ),
                 ],
               ),
@@ -55,5 +58,35 @@ class VotingScreen extends StatelessWidget {
         },
       ),
     );
+  }
+
+  List<Candidate> extractPresidential(List<Candidate> candidates) {
+    List<Candidate> extracted = [];
+    for (Candidate candidate in candidates) {
+      if (candidate.position == 1) {
+        extracted.add(candidate);
+      }
+    }
+    return extracted;
+  }
+
+  List<Candidate> extractParliamentary(List<Candidate> candidates) {
+    List<Candidate> extracted = [];
+    for (Candidate candidate in candidates) {
+      if (candidate.position == 2) {
+        extracted.add(candidate);
+      }
+    }
+    return extracted;
+  }
+
+  List<Candidate> extractCounty(List<Candidate> candidates) {
+    List<Candidate> extracted = [];
+    for (Candidate candidate in candidates) {
+      if (candidate.position == 3) {
+        extracted.add(candidate);
+      }
+    }
+    return extracted;
   }
 }

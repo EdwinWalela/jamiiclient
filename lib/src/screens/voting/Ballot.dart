@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:jamiiclient/src/blocs/BallotBloc.dart';
 import 'package:jamiiclient/src/models/Candidate.dart';
 
 class Ballot extends StatelessWidget {
@@ -7,12 +8,14 @@ class Ballot extends StatelessWidget {
   final bool isPresidential;
   final String ballotType;
   final List<Candidate> candidates;
+  final BallotBloc bloc;
 
   Ballot({
     this.pageController,
     this.isPresidential,
     this.ballotType,
     this.candidates,
+    this.bloc,
   });
 
   Widget build(BuildContext context) {
@@ -23,7 +26,12 @@ class Ballot extends StatelessWidget {
           child: ListView.builder(
             itemCount: this.candidates.length,
             itemBuilder: (BuildContext context, int index) {
-              return buildCard(this.isPresidential, this.candidates[index]);
+              return buildCard(
+                this.isPresidential,
+                this.candidates[index],
+                this.bloc,
+                this.ballotType,
+              );
             },
           ),
         ),
@@ -42,19 +50,8 @@ class Ballot extends StatelessWidget {
     );
   }
 
-  Widget buildCheckBox(bool isChecked) {
-    return InkWell(
-      onTap: () {
-        // Change state
-      },
-      child: Checkbox(
-        value: isChecked,
-        onChanged: (bool value) {},
-      ),
-    );
-  }
-
-  Widget buildCard(bool isPresidential, Candidate candidate) {
+  Widget buildCard(bool isPresidential, Candidate candidate, BallotBloc bloc,
+      String ballotType) {
     return Card(
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -64,7 +61,11 @@ class Ballot extends StatelessWidget {
               Icons.person,
               size: 50,
             ),
-            trailing: buildCheckBox(candidate.isChecked),
+            trailing: buildCheckBox(
+              candidate,
+              bloc,
+              ballotType,
+            ),
             title: Text(candidate.name),
             subtitle: isPresidential ? Text(candidate.deputy) : null,
           ),
@@ -77,6 +78,29 @@ class Ballot extends StatelessWidget {
             ],
           ),
         ],
+      ),
+    );
+  }
+
+  Widget buildCheckBox(
+      Candidate candidate, BallotBloc bloc, String ballotType) {
+    return InkWell(
+      onTap: () {
+        // Change state
+        switch (ballotType) {
+          case "Presidential":
+            bloc.addPresidential(candidate);
+            break;
+          case "Parliamentary":
+            bloc.addParliamentary(candidate);
+            break;
+          case "County":
+            bloc.addCounty(candidate);
+        }
+      },
+      child: Checkbox(
+        value: candidate.isChecked,
+        onChanged: (bool value) {},
       ),
     );
   }

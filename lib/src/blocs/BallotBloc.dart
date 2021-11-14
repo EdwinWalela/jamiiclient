@@ -57,25 +57,25 @@ class BallotBloc {
           name: "Edwin",
           deputy: "Walela",
           image: "",
-          position: 1,
+          position: 2,
           isChecked: false),
       Candidate(
           name: "Edwin",
           deputy: "Walela",
           image: "",
-          position: 1,
+          position: 2,
           isChecked: false),
       Candidate(
           name: "Edwin",
           deputy: "Walela",
           image: "",
-          position: 1,
+          position: 2,
           isChecked: false),
       Candidate(
           name: "Edwin",
           deputy: "Walela",
           image: "",
-          position: 1,
+          position: 2,
           isChecked: false),
     ];
 
@@ -84,25 +84,25 @@ class BallotBloc {
           name: "Edwin",
           deputy: "Walela",
           image: "",
-          position: 1,
+          position: 3,
           isChecked: false),
       Candidate(
           name: "Edwin",
           deputy: "Walela",
           image: "",
-          position: 1,
+          position: 3,
           isChecked: false),
       Candidate(
           name: "Edwin",
           deputy: "Walela",
           image: "",
-          position: 1,
+          position: 3,
           isChecked: false),
       Candidate(
           name: "Edwin",
           deputy: "Walela",
           image: "",
-          position: 1,
+          position: 3,
           isChecked: false),
     ];
 
