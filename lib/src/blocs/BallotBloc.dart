@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:ffi';
 
 import 'package:crypto/crypto.dart';
 import 'package:cryptography/cryptography.dart';
@@ -12,15 +11,109 @@ class BallotBloc {
   final _parliamentary = BehaviorSubject<Candidate>();
   final _county = BehaviorSubject<Candidate>();
   final _keyPair = BehaviorSubject<SimpleKeyPair>();
+  final _electionCandidates = BehaviorSubject<List<Candidate>>();
 
   Function(Candidate) get addPresidential => _presidential.sink.add;
   Function(Candidate) get addParliamentary => _parliamentary.sink.add;
   Function(Candidate) get addCounty => _county.sink.add;
   Function(SimpleKeyPair) get addSignature => _keyPair.sink.add;
+  Function(List<Candidate>) get addCandidates => _electionCandidates.sink.add;
 
   Stream<Candidate> get presidential => _presidential.stream;
   Stream<Candidate> get parliamentary => _parliamentary.stream;
   Stream<Candidate> get county => _county.stream;
+  Stream<List<Candidate>> get electionCandidates => _electionCandidates.stream;
+
+  addData() {
+    final List<Candidate> presidentialCandidates = [
+      Candidate(
+          name: "Edwin",
+          deputy: "Walela",
+          image: "",
+          position: 1,
+          isChecked: false),
+      Candidate(
+          name: "Edwin",
+          deputy: "Walela",
+          image: "",
+          position: 1,
+          isChecked: false),
+      Candidate(
+          name: "Edwin",
+          deputy: "Walela",
+          image: "",
+          position: 1,
+          isChecked: false),
+      Candidate(
+          name: "Edwin",
+          deputy: "Walela",
+          image: "",
+          position: 1,
+          isChecked: false),
+    ];
+
+    final List<Candidate> parliamentaryCandidates = [
+      Candidate(
+          name: "Edwin",
+          deputy: "Walela",
+          image: "",
+          position: 1,
+          isChecked: false),
+      Candidate(
+          name: "Edwin",
+          deputy: "Walela",
+          image: "",
+          position: 1,
+          isChecked: false),
+      Candidate(
+          name: "Edwin",
+          deputy: "Walela",
+          image: "",
+          position: 1,
+          isChecked: false),
+      Candidate(
+          name: "Edwin",
+          deputy: "Walela",
+          image: "",
+          position: 1,
+          isChecked: false),
+    ];
+
+    final List<Candidate> countyCandidates = [
+      Candidate(
+          name: "Edwin",
+          deputy: "Walela",
+          image: "",
+          position: 1,
+          isChecked: false),
+      Candidate(
+          name: "Edwin",
+          deputy: "Walela",
+          image: "",
+          position: 1,
+          isChecked: false),
+      Candidate(
+          name: "Edwin",
+          deputy: "Walela",
+          image: "",
+          position: 1,
+          isChecked: false),
+      Candidate(
+          name: "Edwin",
+          deputy: "Walela",
+          image: "",
+          position: 1,
+          isChecked: false),
+    ];
+
+    List<Candidate> candidates;
+
+    candidates.addAll(presidentialCandidates);
+    candidates.addAll(parliamentaryCandidates);
+    candidates.addAll(countyCandidates);
+
+    addCandidates(candidates);
+  }
 
   submit() async {
     final timestamp = DateTime.now().millisecondsSinceEpoch.toString();
@@ -81,6 +174,7 @@ class BallotBloc {
     _presidential.close();
     _parliamentary.close();
     _county.close();
+    _electionCandidates.close();
     _keyPair.close();
   }
 }

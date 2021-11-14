@@ -6,7 +6,7 @@ import 'package:jamiiclient/src/screens/voting/Intro.dart';
 
 class VotingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
-    final PageController pageController = PageController(initialPage: 0);
+    final PageController pageController = PageController(initialPage: 1);
 
     final List<Candidate> presidentialCandidates = [
       Candidate(

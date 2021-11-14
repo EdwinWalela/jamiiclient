@@ -43,9 +43,14 @@ class Ballot extends StatelessWidget {
   }
 
   Widget buildCheckBox(bool isChecked) {
-    return Checkbox(
-      value: isChecked,
-      onChanged: (bool value) {},
+    return InkWell(
+      onTap: () {
+        // Change state
+      },
+      child: Checkbox(
+        value: isChecked,
+        onChanged: (bool value) {},
+      ),
     );
   }
 
