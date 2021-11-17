@@ -1,3 +1,4 @@
+import 'package:cryptography/cryptography.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:jamiiclient/src/blocs/BallotBlocProvider.dart';
@@ -7,10 +8,15 @@ import 'package:jamiiclient/src/screens/voting/Confirmation.dart';
 import 'package:jamiiclient/src/screens/voting/Intro.dart';
 
 class VotingScreen extends StatelessWidget {
+  final SimpleKeyPair keyPair;
+  VotingScreen({this.keyPair});
+
   Widget build(BuildContext context) {
     final bloc = BallotBlocProvider.of(context);
+
     // Hard coded data
     bloc.addData();
+    bloc.addKeyPair(this.keyPair);
 
     final PageController pageController = PageController(initialPage: 1);
 
@@ -85,12 +91,14 @@ class VotingScreen extends StatelessWidget {
                       );
                     },
                   ),
+                  // Confirmation
                   StreamBuilder(
                       stream: bloc.selectedCandidates,
                       builder: (BuildContext context,
                           AsyncSnapshot<List<Candidate>> snapshot) {
                         if (snapshot.hasData) {
                           return ConfirmationScreen(
+                              bloc: bloc,
                               candidates: snapshot.data,
                               pageController: pageController);
                         } else {

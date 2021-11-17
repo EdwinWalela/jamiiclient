@@ -28,7 +28,7 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       // home: OnBoardingScreen(),
       home: BallotBlocProvider(
-        child: VotingScreen(),
+        child: VotingScreen(keyPair: this.keyPair),
       ),
       // home: BiometricsProvider(
       // child: RegistrationScreen(cameras: this.cameras,keyPair: this.keyPair,),

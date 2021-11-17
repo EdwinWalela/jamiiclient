@@ -16,7 +16,7 @@ class BallotBloc {
   Function(Candidate) get addPresidential => _presidential.sink.add;
   Function(Candidate) get addParliamentary => _parliamentary.sink.add;
   Function(Candidate) get addCounty => _county.sink.add;
-  Function(SimpleKeyPair) get addSignature => _keyPair.sink.add;
+  Function(SimpleKeyPair) get addKeyPair => _keyPair.sink.add;
   Function(List<Candidate>) get addCandidates => _electionCandidates.sink.add;
 
   Stream<Candidate> get presidential => _presidential.stream;

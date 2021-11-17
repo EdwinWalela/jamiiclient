@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:jamiiclient/src/blocs/BallotBloc.dart';
 import 'package:jamiiclient/src/models/Candidate.dart';
 
 class ConfirmationScreen extends StatelessWidget {
   final List<Candidate> candidates;
   final PageController pageController;
+  final BallotBloc bloc;
 
-  ConfirmationScreen({this.candidates, this.pageController});
+  ConfirmationScreen({this.candidates, this.pageController, this.bloc});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,7 @@ class ConfirmationScreen extends StatelessWidget {
             },
           ),
         ),
-        buildButton("Cast Vote", this.pageController)
+        buildButton("Cast Vote", this.pageController, this.bloc)
       ],
     );
   }
@@ -38,10 +40,7 @@ class ConfirmationScreen extends StatelessWidget {
     );
   }
 
-  Widget buildCard(
-    bool isPresidential,
-    Candidate candidate,
-  ) {
+  Widget buildCard(bool isPresidential, Candidate candidate) {
     return Card(
       child: Column(
         //mainAxisSize: MainAxisSize.min,
@@ -67,7 +66,8 @@ class ConfirmationScreen extends StatelessWidget {
     );
   }
 
-  Widget buildButton(String buttonText, PageController pageController) {
+  Widget buildButton(
+      String buttonText, PageController pageController, BallotBloc bloc) {
     return SizedBox(
       width: 120,
       child: ElevatedButton(
@@ -76,6 +76,7 @@ class ConfirmationScreen extends StatelessWidget {
             duration: Duration(milliseconds: 500),
             curve: Curves.easeInOut,
           );
+          bloc.submit();
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
