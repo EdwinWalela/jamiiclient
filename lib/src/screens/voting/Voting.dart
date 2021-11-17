@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:jamiiclient/src/blocs/BallotBlocProvider.dart';
 import 'package:jamiiclient/src/models/Candidate.dart';
 import 'package:jamiiclient/src/screens/voting/Ballot.dart';
+import 'package:jamiiclient/src/screens/voting/Confirmation.dart';
 import 'package:jamiiclient/src/screens/voting/Intro.dart';
 
 class VotingScreen extends StatelessWidget {
@@ -84,6 +85,17 @@ class VotingScreen extends StatelessWidget {
                       );
                     },
                   ),
+                  StreamBuilder(
+                      stream: bloc.selectedCandidates,
+                      builder: (BuildContext context,
+                          AsyncSnapshot<List<Candidate>> snapshot) {
+                        if (snapshot.hasData) {
+                          print(snapshot.data);
+                          return ConfirmationScreen();
+                        } else {
+                          return ConfirmationScreen();
+                        }
+                      })
                 ],
               ),
             );

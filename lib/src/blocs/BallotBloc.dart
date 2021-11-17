@@ -24,6 +24,9 @@ class BallotBloc {
   Stream<Candidate> get county => _county.stream;
   Stream<List<Candidate>> get electionCandidates => _electionCandidates.stream;
 
+  Stream<List<Candidate>> get selectedCandidates =>
+      CombineLatestStream.list([_presidential, _parliamentary, _county]);
+
   addData() {
     final List<Candidate> presidentialCandidates = [
       Candidate(
