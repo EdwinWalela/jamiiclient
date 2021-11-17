@@ -28,26 +28,62 @@ class VotingScreen extends StatelessWidget {
                 controller: pageController,
                 children: [
                   Intro(pageController: pageController),
-                  Ballot(
-                    bloc: bloc,
-                    pageController: pageController,
-                    ballotType: "Presidential",
-                    isPresidential: true,
-                    candidates: extractPresidential(snapshot.data),
+                  StreamBuilder(
+                    stream: bloc.presidential,
+                    builder: (BuildContext context,
+                        AsyncSnapshot<Candidate> candidateSnapshot) {
+                      if (candidateSnapshot.hasData) {
+                        print(candidateSnapshot.data);
+                        return Ballot(
+                            bloc: bloc,
+                            pageController: pageController,
+                            ballotType: "Presidential",
+                            isPresidential: true,
+                            candidates: extractPresidential(snapshot.data),
+                            selectedCandidate: candidateSnapshot.data);
+                      } else {
+                        print(candidateSnapshot.data);
+                        return Ballot(
+                            bloc: bloc,
+                            pageController: pageController,
+                            ballotType: "Presidential",
+                            isPresidential: true,
+                            candidates: extractPresidential(snapshot.data),
+                            selectedCandidate: Candidate());
+                      }
+                    },
                   ),
-                  Ballot(
-                    bloc: bloc,
-                    pageController: pageController,
-                    ballotType: "Parliamentary",
-                    isPresidential: false,
-                    candidates: extractParliamentary(snapshot.data),
+                  StreamBuilder(
+                    stream: bloc.parliamentary,
+                    builder: (BuildContext context,
+                        AsyncSnapshot<Candidate> candidateSnapshot) {
+                      return Ballot(
+                        bloc: bloc,
+                        pageController: pageController,
+                        ballotType: "Parliamentary",
+                        isPresidential: false,
+                        candidates: extractParliamentary(snapshot.data),
+                        selectedCandidate: candidateSnapshot.hasData
+                            ? candidateSnapshot.data
+                            : Candidate(),
+                      );
+                    },
                   ),
-                  Ballot(
-                    bloc: bloc,
-                    pageController: pageController,
-                    ballotType: "County Assembly Ward",
-                    isPresidential: false,
-                    candidates: extractCounty(snapshot.data),
+                  StreamBuilder(
+                    stream: bloc.county,
+                    builder: (BuildContext context,
+                        AsyncSnapshot<Candidate> candidateSnapshot) {
+                      return Ballot(
+                        bloc: bloc,
+                        pageController: pageController,
+                        ballotType: "County",
+                        isPresidential: false,
+                        candidates: extractCounty(snapshot.data),
+                        selectedCandidate: candidateSnapshot.hasData
+                            ? candidateSnapshot.data
+                            : Candidate(),
+                      );
+                    },
                   ),
                 ],
               ),

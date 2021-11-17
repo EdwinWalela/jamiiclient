@@ -27,25 +27,25 @@ class BallotBloc {
   addData() {
     final List<Candidate> presidentialCandidates = [
       Candidate(
-          name: "Edwin",
+          name: "Edwin1",
           deputy: "Walela",
           image: "",
           position: 1,
           isChecked: false),
       Candidate(
-          name: "Edwin",
+          name: "Edwin2",
           deputy: "Walela",
           image: "",
           position: 1,
           isChecked: false),
       Candidate(
-          name: "Edwin",
+          name: "Edwin3",
           deputy: "Walela",
           image: "",
           position: 1,
           isChecked: false),
       Candidate(
-          name: "Edwin",
+          name: "Edwin4",
           deputy: "Walela",
           image: "",
           position: 1,
@@ -54,25 +54,25 @@ class BallotBloc {
 
     final List<Candidate> parliamentaryCandidates = [
       Candidate(
-          name: "Edwin",
+          name: "Edwin9",
           deputy: "Walela",
           image: "",
           position: 2,
           isChecked: false),
       Candidate(
-          name: "Edwin",
+          name: "Edwin8",
           deputy: "Walela",
           image: "",
           position: 2,
           isChecked: false),
       Candidate(
-          name: "Edwin",
+          name: "Edwin7",
           deputy: "Walela",
           image: "",
           position: 2,
           isChecked: false),
       Candidate(
-          name: "Edwin",
+          name: "Edwin6",
           deputy: "Walela",
           image: "",
           position: 2,
@@ -81,25 +81,25 @@ class BallotBloc {
 
     final List<Candidate> countyCandidates = [
       Candidate(
-          name: "Edwin",
+          name: "Edwinc1",
           deputy: "Walela",
           image: "",
           position: 3,
           isChecked: false),
       Candidate(
-          name: "Edwin",
+          name: "Edwinc2",
           deputy: "Walela",
           image: "",
           position: 3,
           isChecked: false),
       Candidate(
-          name: "Edwin",
+          name: "Edwinc3",
           deputy: "Walela",
           image: "",
           position: 3,
           isChecked: false),
       Candidate(
-          name: "Edwin",
+          name: "Edwinc4",
           deputy: "Walela",
           image: "",
           position: 3,

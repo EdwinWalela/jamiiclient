@@ -9,6 +9,7 @@ class Ballot extends StatelessWidget {
   final String ballotType;
   final List<Candidate> candidates;
   final BallotBloc bloc;
+  final Candidate selectedCandidate;
 
   Ballot({
     this.pageController,
@@ -16,6 +17,7 @@ class Ballot extends StatelessWidget {
     this.ballotType,
     this.candidates,
     this.bloc,
+    this.selectedCandidate,
   });
 
   Widget build(BuildContext context) {
@@ -31,6 +33,7 @@ class Ballot extends StatelessWidget {
                 this.candidates[index],
                 this.bloc,
                 this.ballotType,
+                this.selectedCandidate,
               );
             },
           ),
@@ -51,7 +54,7 @@ class Ballot extends StatelessWidget {
   }
 
   Widget buildCard(bool isPresidential, Candidate candidate, BallotBloc bloc,
-      String ballotType) {
+      String ballotType, Candidate selectedCandidate) {
     return Card(
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -65,6 +68,7 @@ class Ballot extends StatelessWidget {
               candidate,
               bloc,
               ballotType,
+              selectedCandidate,
             ),
             title: Text(candidate.name),
             subtitle: isPresidential ? Text(candidate.deputy) : null,
@@ -82,8 +86,10 @@ class Ballot extends StatelessWidget {
     );
   }
 
-  Widget buildCheckBox(
-      Candidate candidate, BallotBloc bloc, String ballotType) {
+  Widget buildCheckBox(Candidate candidate, BallotBloc bloc, String ballotType,
+      Candidate selectedCandidate) {
+    // print(selectedCandidate.name);
+    // print(candidate.name);
     return InkWell(
       onTap: () {
         // Change state
@@ -98,10 +104,9 @@ class Ballot extends StatelessWidget {
             bloc.addCounty(candidate);
         }
       },
-      child: Checkbox(
-        value: candidate.isChecked,
-        onChanged: (bool value) {},
-      ),
+      child: candidate.name != selectedCandidate.name
+          ? Icon(Icons.check_box_outline_blank)
+          : Icon(Icons.check_box_outlined),
     );
   }
 
