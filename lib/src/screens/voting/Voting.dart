@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:jamiiclient/src/blocs/BallotBloc.dart';
 import 'package:jamiiclient/src/blocs/BallotBlocProvider.dart';
 import 'package:jamiiclient/src/models/Candidate.dart';
 import 'package:jamiiclient/src/screens/voting/Ballot.dart';
@@ -28,12 +27,13 @@ class VotingScreen extends StatelessWidget {
                 controller: pageController,
                 children: [
                   Intro(pageController: pageController),
+
+                  // Ballots
                   StreamBuilder(
                     stream: bloc.presidential,
                     builder: (BuildContext context,
                         AsyncSnapshot<Candidate> candidateSnapshot) {
                       if (candidateSnapshot.hasData) {
-                        print(candidateSnapshot.data);
                         return Ballot(
                             bloc: bloc,
                             pageController: pageController,
@@ -42,7 +42,6 @@ class VotingScreen extends StatelessWidget {
                             candidates: extractPresidential(snapshot.data),
                             selectedCandidate: candidateSnapshot.data);
                       } else {
-                        print(candidateSnapshot.data);
                         return Ballot(
                             bloc: bloc,
                             pageController: pageController,
