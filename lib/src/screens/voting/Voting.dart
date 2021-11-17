@@ -90,10 +90,13 @@ class VotingScreen extends StatelessWidget {
                       builder: (BuildContext context,
                           AsyncSnapshot<List<Candidate>> snapshot) {
                         if (snapshot.hasData) {
-                          print(snapshot.data);
-                          return ConfirmationScreen();
+                          return ConfirmationScreen(
+                              candidates: snapshot.data,
+                              pageController: pageController);
                         } else {
-                          return ConfirmationScreen();
+                          return ConfirmationScreen(
+                            candidates: [],
+                          );
                         }
                       })
                 ],
