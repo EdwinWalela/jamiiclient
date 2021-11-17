@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:jamiiclient/src/blocs/BallotBlocProvider.dart';
 import 'package:jamiiclient/src/models/Candidate.dart';
+import 'package:jamiiclient/src/screens/voting/Success.dart';
 import 'package:jamiiclient/src/screens/voting/Ballot.dart';
 import 'package:jamiiclient/src/screens/voting/Confirmation.dart';
 import 'package:jamiiclient/src/screens/voting/Intro.dart';
@@ -93,20 +94,22 @@ class VotingScreen extends StatelessWidget {
                   ),
                   // Confirmation
                   StreamBuilder(
-                      stream: bloc.selectedCandidates,
-                      builder: (BuildContext context,
-                          AsyncSnapshot<List<Candidate>> snapshot) {
-                        if (snapshot.hasData) {
-                          return ConfirmationScreen(
-                              bloc: bloc,
-                              candidates: snapshot.data,
-                              pageController: pageController);
-                        } else {
-                          return ConfirmationScreen(
-                            candidates: [],
-                          );
-                        }
-                      })
+                    stream: bloc.selectedCandidates,
+                    builder: (BuildContext context,
+                        AsyncSnapshot<List<Candidate>> snapshot) {
+                      if (snapshot.hasData) {
+                        return ConfirmationScreen(
+                            bloc: bloc,
+                            candidates: snapshot.data,
+                            pageController: pageController);
+                      } else {
+                        return ConfirmationScreen(
+                          candidates: [],
+                        );
+                      }
+                    },
+                  ),
+                  SuccessScreen()
                 ],
               ),
             );
