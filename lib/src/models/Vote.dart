@@ -26,6 +26,6 @@ class Vote {
     final parliamentary = '${this.parliamentary.name}';
     final county = '${this.county.name}';
 
-    return "${this.hash}|${this.signature}|${this.pubKey64}|$presidential|$parliamentary|$county|${this.timestamp}";
+    return "${this.hash}|${this.signature}|${this.pubKey64}|$presidential.$parliamentary.$county|${this.timestamp}";
   }
 }
