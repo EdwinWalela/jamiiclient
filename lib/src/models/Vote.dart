@@ -22,6 +22,10 @@ class Vote {
   @override
   String toString() {
     // final data = "$digest|$sig64|$pub64|$pub64.$pub64.$pub64.$pub64|$timestamp";
-    return "${this.hash}|${this.signature}|${this.pubKey64}|${this.presidential}|${this.parliamentary}|${this.county}|${this.timestamp}";
+    final presidential = '${this.presidential.name}';
+    final parliamentary = '${this.parliamentary.name}';
+    final county = '${this.county.name}';
+
+    return "${this.hash}|${this.signature}|${this.pubKey64}|$presidential|$parliamentary|$county|${this.timestamp}";
   }
 }
