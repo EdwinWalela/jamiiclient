@@ -19,7 +19,7 @@ class VotingScreen extends StatelessWidget {
     bloc.addData();
     bloc.addKeyPair(this.keyPair);
 
-    final PageController pageController = PageController(initialPage: 1);
+    final PageController pageController = PageController(initialPage: 0);
 
     return Scaffold(
       body: StreamBuilder(

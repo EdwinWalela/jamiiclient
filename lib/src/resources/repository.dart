@@ -2,9 +2,11 @@ import 'dart:convert';
 import 'package:jamiiclient/src/models/Biometrics.dart';
 import 'package:jamiiclient/src/models/User.dart';
 import 'package:jamiiclient/src/resources/BioAPIProvider.dart';
+import 'package:jamiiclient/src/resources/SocketProvider.dart';
 
 class Repository {
   final BioAPIProvider bioAPIProvider = BioAPIProvider();
+  final SocketProvider socketProvider = SocketProvider();
 
   Future<Biometrics> extractBiometrics(Biometrics bioData) async {
     final res = await bioAPIProvider.detectFaces(bioData);
@@ -48,5 +50,11 @@ class Repository {
     user.faceMatch = parsedJson["match"] == true;
 
     return user;
+  }
+
+  Future<String> sendVote(String vote) async {
+    final res = await socketProvider.sendVote(vote);
+
+    return res;
   }
 }

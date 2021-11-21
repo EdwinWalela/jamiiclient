@@ -4,9 +4,11 @@ import 'package:crypto/crypto.dart';
 import 'package:cryptography/cryptography.dart';
 import 'package:jamiiclient/src/models/Candidate.dart';
 import 'package:jamiiclient/src/models/Vote.dart';
+import 'package:jamiiclient/src/resources/repository.dart';
 import 'package:rxdart/rxdart.dart';
 
 class BallotBloc {
+  final _repository = Repository();
   final _presidential = BehaviorSubject<Candidate>();
   final _parliamentary = BehaviorSubject<Candidate>();
   final _county = BehaviorSubject<Candidate>();
@@ -147,8 +149,11 @@ class BallotBloc {
     vote.hash = digest.toString();
     vote.pubKey64 = pub64;
     vote.timestamp = timestamp;
+
+    final res = await _repository.sendVote(vote.toString());
+
     print("\n");
-    print(vote.toString());
+    print(res);
   }
 
   hashVote(Vote vote, SimpleKeyPair keyPair, String timestamp) async {
