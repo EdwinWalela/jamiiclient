@@ -17,7 +17,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final secureStorage = FlutterSecureStorage();
   final algorithim = Ed25519();
-
   final storedSeed = await secureStorage.read(key: "seed");
 
   var seed;

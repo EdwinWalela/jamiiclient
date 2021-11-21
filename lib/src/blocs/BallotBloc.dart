@@ -133,6 +133,7 @@ class BallotBloc {
       parliamentary: parliamentaryCandidate,
       county: countyCandidate,
     );
+
     final algorithim = Ed25519();
 
     Digest digest = await hashVote(vote, keyPair, timestamp);
@@ -147,6 +148,7 @@ class BallotBloc {
 
     vote.signature = sig64;
     vote.hash = digest.toString();
+
     vote.pubKey64 = pub64;
     vote.timestamp = timestamp;
 
