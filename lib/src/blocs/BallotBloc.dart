@@ -138,7 +138,8 @@ class BallotBloc {
 
     Digest digest = await hashVote(vote, keyPair, timestamp);
 
-    final signature = await algorithim.sign(digest.bytes, keyPair: keyPair);
+    final digestBytes = utf8.encode(digest.toString());
+    final signature = await algorithim.sign(digestBytes, keyPair: keyPair);
 
     // // encode64 signature
     final sig64 = base64Encode(signature.bytes);

@@ -12,7 +12,7 @@ class SocketProvider {
     };
 
     // Connect to node
-    IO.Socket socket = IO.io('wss://af09-197-237-160-234.ngrok.io');
+    IO.Socket socket = IO.io('wss://b191-197-237-160-234.ngrok.io');
 
     try {
       socket.onConnect((data) => {
