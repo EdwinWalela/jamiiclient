@@ -52,7 +52,15 @@ class Repository {
     return user;
   }
 
-  Future<String> sendVote(String vote) async {
+  registerVoter(String details) {
+    socketProvider.registerVoter(details);
+  }
+
+  mockRegistration() {
+    socketProvider.mockRegistration();
+  }
+
+  Future<bool> sendVote(String vote) async {
     final res = await socketProvider.sendVote(vote);
 
     return res;

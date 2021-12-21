@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:crypto/crypto.dart';
 import 'package:cryptography/cryptography.dart';
 import 'package:flutter/material.dart';
+import 'package:jamiiclient/src/blocs/BiometricsBloc.dart';
 import 'package:jamiiclient/src/models/User.dart';
 
 class DetailConfirmationScreen extends StatelessWidget {
@@ -11,12 +12,14 @@ class DetailConfirmationScreen extends StatelessWidget {
   final User user;
   final PageController pageController;
   final SimpleKeyPair keyPair;
+  final BiometricsBloc biometricsBloc;
 
   DetailConfirmationScreen({
     this.header,
     this.user,
     this.pageController,
     this.keyPair,
+    this.biometricsBloc,
   });
 
   Widget build(BuildContext context) {
@@ -144,16 +147,17 @@ class DetailConfirmationScreen extends StatelessWidget {
             final pubKey = await keyPair.extractPublicKey();
             final pubKey64 = base64Encode(pubKey.bytes);
 
-            // Send signature and pubkey to node
-            // Add to sink
-            print(sig64);
-            print(pubKey64);
+            // uniquely identify user & save localy
+            this.biometricsBloc.addExtractedDetails(digest.toString());
+
+            await this.biometricsBloc.sendExtractedDetails();
 
             pageController.nextPage(
               duration: Duration(milliseconds: 500),
               curve: Curves.easeInOut,
             );
           } else {
+            this.biometricsBloc.drainUserStream();
             pageController.animateToPage(
               1,
               duration: Duration(milliseconds: 500),

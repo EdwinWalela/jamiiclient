@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:cryptography/cryptography.dart';
 import 'package:jamiiclient/src/models/Biometrics.dart';
 import 'package:jamiiclient/src/models/User.dart';
 import 'package:jamiiclient/src/resources/repository.dart';
@@ -11,8 +12,14 @@ class BiometricsBloc {
   final _selfie = BehaviorSubject<String>();
   final _idCard = BehaviorSubject<String>();
   final _responseStream = BehaviorSubject<User>();
+  final _extractedDetails = BehaviorSubject<String>();
+  final _keyPair = BehaviorSubject<SimpleKeyPair>();
 
   // Getters
+
+  Function(SimpleKeyPair) get addKeyPair => _keyPair.sink.add;
+  Stream<SimpleKeyPair> get keyPair => _keyPair.stream;
+
   Function(String) get addSelfie => _selfie.sink.add;
   Stream<String> get selfie => _selfie.stream;
 
@@ -23,6 +30,9 @@ class BiometricsBloc {
   Stream<User> get user =>
       _responseStream.stream.transform(biometricsValidation);
 
+  Function(String) get addExtractedDetails => _extractedDetails.sink.add;
+  Stream<String> get extractedDetails => _extractedDetails.stream;
+
   final biometricsValidation = StreamTransformer<User, User>.fromHandlers(
     handleData: (user, sink) {
       if (user.idNo.isEmpty) {
@@ -32,6 +42,10 @@ class BiometricsBloc {
       }
     },
   );
+
+  mockRegistration() {
+    _repository.mockRegistration();
+  }
 
   submit() async {
     drainUserStream();
@@ -67,13 +81,31 @@ class BiometricsBloc {
     }
   }
 
+  sendExtractedDetails() async {
+    final details = _extractedDetails.value;
+    _repository.registerVoter(details);
+  }
+
   drainUserStream() {
-    _responseStream.drain();
+    // await _responseStream.drain();
+    addUser(
+      User(
+        dob: "redo",
+        faceMatch: false,
+        idNo: "",
+        name: "",
+        sex: "",
+        extracted: [""],
+        facePath: "",
+        idPath: "",
+      ),
+    );
   }
 
   dispose() {
     _selfie.close();
     _idCard.close();
     _responseStream.close();
+    _extractedDetails.close();
   }
 }

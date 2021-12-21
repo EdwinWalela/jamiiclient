@@ -42,6 +42,7 @@ void main() async {
   // final privKey = await keyPair.extractPrivateKeyBytes();
 
   final pubKey64 = base64Encode(pubKey.bytes);
+
   // final privKey64 = base64Encode(privKey);
 
   // final timestamp = DateTime.now().millisecondsSinceEpoch.toString();
