@@ -120,6 +120,10 @@ class BallotBloc {
     addCandidates(candidates);
   }
 
+  mockVote() {
+    _repository.mockVote();
+  }
+
   submit() async {
     final timestamp = DateTime.now().millisecondsSinceEpoch.toString();
 
@@ -153,6 +157,7 @@ class BallotBloc {
     vote.pubKey64 = pub64;
     vote.timestamp = timestamp;
 
+    print(vote.toString());
     final res = await _repository.sendVote(vote.toString());
 
     print("\n");

@@ -56,11 +56,16 @@ class Repository {
     socketProvider.registerVoter(details);
   }
 
-  mockRegistration() {
-    socketProvider.mockRegistration();
+  mockRegistration(String details) {
+    socketProvider.mockRegistration(details);
+  }
+
+  mockVote() {
+    socketProvider.mockVote();
   }
 
   Future<bool> sendVote(String vote) async {
+    print(vote);
     final res = await socketProvider.sendVote(vote);
 
     return res;

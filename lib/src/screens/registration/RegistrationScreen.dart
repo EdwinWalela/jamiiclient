@@ -19,6 +19,9 @@ class RegistrationScreen extends StatelessWidget {
     final PageController pageController = PageController(initialPage: 0);
     final BiometricsBloc biometricsBloc = BiometricsProvider.of(context);
 
+    // Public key to be sent with registration
+    biometricsBloc.addKeyPair(keyPair);
+
     biometricsBloc.mockRegistration();
 
     return Scaffold(

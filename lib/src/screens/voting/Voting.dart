@@ -15,6 +15,8 @@ class VotingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final bloc = BallotBlocProvider.of(context);
 
+    bloc.mockVote();
+
     // Hard coded data
     bloc.addData();
     bloc.addKeyPair(this.keyPair);

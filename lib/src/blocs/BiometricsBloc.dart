@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:cryptography/cryptography.dart';
@@ -43,8 +44,22 @@ class BiometricsBloc {
     },
   );
 
-  mockRegistration() {
-    _repository.mockRegistration();
+  mockRegistration() async {
+    final keyPair = _keyPair.value;
+
+    final algorithim = Ed25519();
+    final hash =
+        "b5300a79468cf8cac475a0fd892a65339e3b90c4755d77b643a38b75d2820b3c2c6884466c37c60de3deb05cba9798ed07646cb81b268fe98bdb0286de4bbffc";
+    // sign extracted ID information with users keypair
+    final signature = await algorithim.sign(
+      utf8.encode(hash),
+      keyPair: keyPair,
+    );
+
+    final sig64 = base64Encode(signature.bytes);
+    final pubKey = await keyPair.extractPublicKey();
+    final pubKey64 = base64Encode(pubKey.bytes);
+    _repository.mockRegistration("$hash|$pubKey64|$sig64");
   }
 
   submit() async {
@@ -83,7 +98,10 @@ class BiometricsBloc {
 
   sendExtractedDetails() async {
     final details = _extractedDetails.value;
-    _repository.registerVoter(details);
+    final keyPair = _keyPair.value;
+    final pubKey = await keyPair.extractPublicKey();
+    final pubKey64 = base64Encode(pubKey.bytes);
+    _repository.registerVoter(details + "|" + pubKey64);
   }
 
   drainUserStream() {

@@ -5,24 +5,50 @@ import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'dart:convert';
 
 class SocketProvider {
-  void mockRegistration() {
-    print("mocking");
+  final uri = "wss://bf86-197-237-124-8.ngrok.io";
+
+  void mockRegistration(String details) {
+    print("mocking registration");
     final header = {
       "source": "client",
       "type": "0",
-      "data":
-          "b5300a79468cf8cac475a0fd892a65339e3b90c4755d77b643a38b75d2820b3c2c6884466c37c60de3deb05cba9798ed07646cb81b268fe98bdb0286de4bbffc"
+      "data": details,
     };
-    IO.Socket socket = IO.io('wss://85dc-197-237-160-234.ngrok.io');
+    IO.Socket socket = IO.io(
+      uri,
+    );
 
     socket.onConnect((data) => {
           print("Connected to Node"),
           socket.emit("register", json.encode(header)),
         });
+
+    socket.disconnect();
   }
 
   registerVoter(String details) async {
     final data = details;
+    final header = {
+      "source": "client",
+      "type": "0", // vote submission
+      "data": "$data",
+    };
+
+    // Connect to node
+    IO.Socket socket = IO.io(uri);
+
+    socket.onConnect((data) => {
+          print("Connected to Node"),
+          socket.emit("register", json.encode(header)),
+        });
+
+    socket.disconnect();
+  }
+
+  void mockVote() {
+    print("mocking vote");
+    final data =
+        "67e87f6ea0f0d0a71abaaed4b41c2acebfc1076f1c5e490d2e9480426046a486c4fb9a3d5ec56d8f697fb910fe2998ee80a53ddf741a4a7c5643b7e735cd30aa|rLcSZMLSQq+5gHxATwVx/leukV+fD/jfidMRJOxu4Fd6k74hV2bMj5f1U/ObCtsXeVIPlrcbpj1P0cSn7kLYCQ==|sZU3PmAC+auyhzXKvT4x/8k3G5ZE3Znw1+qI900nnH4=|Edwin4.Edwin7.Edwinc4|1641562683605";
     var res = 0;
     var isValid = false;
     final header = {
@@ -32,28 +58,30 @@ class SocketProvider {
     };
 
     // Connect to node
-    IO.Socket socket = IO.io('wss://85dc-197-237-160-234.ngrok.io');
+    IO.Socket socket = IO.io(uri);
 
     socket.onConnect((data) => {
           print("Connected to Node"),
           socket.emit("register", json.encode(header)),
         });
+
+    socket.disconnect();
   }
 
   Future<bool> sendVote(String vote) async {
     final data = vote;
     var res = 0;
-    var isValid = false;
+    var isValid = true;
     final header = {
       "source": "client",
       "type": "0", // vote submission
       "data": "$data",
     };
-
+    print(header);
     // Send vote
 
     // Connect to node
-    IO.Socket socket = IO.io('wss://b191-197-237-160-234.ngrok.io');
+    IO.Socket socket = IO.io(uri);
 
     // final sock = await Socket.connect('b191-197-237-160-234.ngrok.io', 80);
     // sock.add(utf8.encode(json.encode(header)));
@@ -61,29 +89,7 @@ class SocketProvider {
     // final decodedRes = String.fromCharCodes(res);
     // print(decodedRes);
     // sock.close();
-    while (res != 1) {
-      print(".");
-      socket.onConnect(
-        (data) => {
-          print("Connected to Node"),
-          socket.emit("vote", json.encode(header)),
-          socket.on(
-            "VOTE_ACK",
-            (data) {
-              isValid = true;
-              res = 1;
-            },
-          ),
-          socket.on(
-            "VOTE_INV",
-            (data) {
-              isValid = false;
-              res = 1;
-            },
-          )
-        },
-      );
-    }
+
     return isValid;
   }
 }
