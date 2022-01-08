@@ -5,7 +5,7 @@ import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'dart:convert';
 
 class SocketProvider {
-  final uri = "wss://bf86-197-237-124-8.ngrok.io";
+  final uri = "wss://0275-197-237-124-8.ngrok.io";
 
   void mockRegistration(String details) {
     print("mocking registration");
@@ -21,9 +21,8 @@ class SocketProvider {
     socket.onConnect((data) => {
           print("Connected to Node"),
           socket.emit("register", json.encode(header)),
+          socket.disconnect()
         });
-
-    socket.disconnect();
   }
 
   registerVoter(String details) async {
@@ -62,10 +61,9 @@ class SocketProvider {
 
     socket.onConnect((data) => {
           print("Connected to Node"),
-          socket.emit("register", json.encode(header)),
+          socket.emit("vote", json.encode(header)),
+          socket.disconnect()
         });
-
-    socket.disconnect();
   }
 
   Future<bool> sendVote(String vote) async {
