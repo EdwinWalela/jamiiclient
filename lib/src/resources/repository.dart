@@ -10,7 +10,7 @@ class Repository {
 
   Future<Biometrics> extractBiometrics(Biometrics bioData) async {
     final res = await bioAPIProvider.detectFaces(bioData);
-
+    print(res);
     var parsedJson = jsonDecode(res);
 
     Biometrics bio = Biometrics.fromJson(parsedJson);
@@ -46,6 +46,7 @@ class Repository {
   Future<User> verifyBiometrics(Biometrics bioData) async {
     final res = await bioAPIProvider.verifyFaces(bioData);
     var parsedJson = jsonDecode(res);
+    print(res);
     User user = bioData.user;
     user.faceMatch = parsedJson["match"] == true;
 

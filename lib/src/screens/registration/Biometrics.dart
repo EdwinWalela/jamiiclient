@@ -63,7 +63,7 @@ class _BiometricsState extends State<Biometrics> {
               Container(margin: EdgeInsets.only(top: 20)),
               buildHeader(widget.header),
               Container(margin: EdgeInsets.only(top: 20)),
-              buildImageFrame(context),
+              buildImageFrame(context, widget.isPotrait),
               Container(margin: EdgeInsets.only(top: 10)),
               buildButton("Capture", widget.pageController, widget.isPotrait,
                   widget.biometricsBloc),
@@ -88,15 +88,30 @@ class _BiometricsState extends State<Biometrics> {
     );
   }
 
-  Widget buildImageFrame(BuildContext context) {
+  Widget buildImageFrame(BuildContext context, bool selfie) {
     return Container(
-      width: MediaQuery.of(context).size.width * 0.9,
-      height: MediaQuery.of(context).size.height * 0.65,
-      decoration: BoxDecoration(
-          // border: Border.all(color: Colors.black, width: 3),
-          ),
-      child: CameraPreview(_controller),
-    );
+        width: MediaQuery.of(context).size.width * 0.9,
+        height: MediaQuery.of(context).size.height * 0.65,
+        decoration: BoxDecoration(
+            // border: Border.all(color: Colors.black, width: 3),
+            ),
+        child: Stack(
+          alignment: FractionalOffset.center,
+          children: <Widget>[
+            Positioned.fill(
+              child: AspectRatio(
+                  aspectRatio: _controller.value.aspectRatio,
+                  child: CameraPreview(_controller)),
+            ),
+            Image.asset(
+              selfie
+                  ? 'assets/images/face-placeholder.png'
+                  : 'assets/images/id-placeholder.png',
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
+            ),
+          ],
+        ));
   }
 
   Widget buildButton(String buttonText, PageController pageController,
@@ -156,3 +171,5 @@ class _BiometricsState extends State<Biometrics> {
     );
   }
 }
+
+// 

@@ -16,13 +16,13 @@ class RegistrationScreen extends StatelessWidget {
   RegistrationScreen({this.cameras, this.keyPair});
 
   Widget build(BuildContext context) {
-    final PageController pageController = PageController(initialPage: 0);
+    final PageController pageController = PageController(initialPage: 1);
     final BiometricsBloc biometricsBloc = BiometricsProvider.of(context);
 
     // Public key to be sent with registration
     biometricsBloc.addKeyPair(keyPair);
 
-    biometricsBloc.mockRegistration();
+    // biometricsBloc.mockRegistration();
 
     return Scaffold(
       body: Padding(
