@@ -31,16 +31,6 @@ class OnBoardingScreen extends StatelessWidget {
           ),
           InfoScreen(
             index: 3,
-            title: "Vote Anywhere",
-            description:
-                "Register for elections and cast your vote from anywhere using your mobile phone",
-            buttonText: "Next",
-            svgTop: false,
-            iconFile: "assets/gif/relax.gif",
-            pageController: pageController,
-          ),
-          InfoScreen(
-            index: 4,
             title: "Immutable",
             description:
                 "Votes are secured using cryptography making it infeasible to be altered",
@@ -50,7 +40,7 @@ class OnBoardingScreen extends StatelessWidget {
             pageController: pageController,
           ),
           InfoScreen(
-            index: 5,
+            index: 4,
             title: "Voting Decentralized",
             description: "Time to take control",
             buttonText: "Get Started",

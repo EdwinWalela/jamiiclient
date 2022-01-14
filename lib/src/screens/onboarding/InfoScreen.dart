@@ -28,7 +28,7 @@ class InfoScreen extends StatelessWidget {
           this.svgTop
               ? buildsvgTop(this.title, this.description, this.iconFile)
               : buildsvgBottom(this.title, this.description, this.iconFile),
-          this.index != 5 ? buildNext(buttonText) : buildGetStarted(context)
+          this.index != 4 ? buildNext(buttonText) : buildGetStarted(context)
         ],
       ),
     );

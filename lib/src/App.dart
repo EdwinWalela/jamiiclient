@@ -9,6 +9,7 @@ import 'package:jamiiclient/src/screens/voting/Voting.dart';
 class App extends StatelessWidget {
   final cameras;
   final keyPair;
+  // final val;RR
 
   App({this.cameras, this.keyPair});
 

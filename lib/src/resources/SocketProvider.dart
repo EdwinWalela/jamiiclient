@@ -5,7 +5,7 @@ import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'dart:convert';
 
 class SocketProvider {
-  final uri = "wss://0275-197-237-124-8.ngrok.io";
+  final uri = "wss://5f6b-105-163-2-63.ngrok.io";
 
   void mockRegistration(String details) {
     print("mocking registration");
