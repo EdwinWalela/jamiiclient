@@ -1,11 +1,12 @@
 import 'dart:io';
 
+import 'package:jamiiclient/src/resources/DBProvider.dart';
 import 'package:web_socket_channel/io.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'dart:convert';
 
 class SocketProvider {
-  final uri = "wss://5f6b-105-163-2-63.ngrok.io";
+  final uri = "wss://689b-105-163-2-63.ngrok.io";
 
   void mockRegistration(String details) {
     print("mocking registration");
@@ -14,6 +15,8 @@ class SocketProvider {
       "type": "0",
       "data": details,
     };
+    final hash = details.split("|")[0];
+
     IO.Socket socket = IO.io(
       uri,
     );
@@ -21,7 +24,12 @@ class SocketProvider {
     socket.onConnect((data) => {
           print("Connected to Node"),
           socket.emit("register", json.encode(header)),
-          socket.disconnect()
+          socket.on(
+            "VOTE_ACK",
+            (data) => {
+              dbProvider.add(hash),
+            },
+          )
         });
   }
 

@@ -6,6 +6,7 @@ import 'package:cryptography/cryptography.dart';
 import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
 import 'package:jamiiclient/src/App.dart';
+import 'package:jamiiclient/src/resources/DBProvider.dart';
 import 'dart:convert';
 import 'package:web_socket_channel/io.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
@@ -14,6 +15,10 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:camera/camera.dart';
 
 void main() async {
+  await dbProvider.init();
+  final dbHash = await dbProvider.fetchHash();
+  final isRegistered = dbHash.length > 0;
+  print(isRegistered);
   WidgetsFlutterBinding.ensureInitialized();
   final secureStorage = FlutterSecureStorage();
   final algorithim = Ed25519();

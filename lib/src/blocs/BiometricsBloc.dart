@@ -106,18 +106,6 @@ class BiometricsBloc {
 
   drainUserStream() {
     // await _responseStream.drain();
-    addUser(
-      User(
-        dob: "redo",
-        faceMatch: false,
-        idNo: "",
-        name: "",
-        sex: "",
-        extracted: [""],
-        facePath: "",
-        idPath: "",
-      ),
-    );
   }
 
   dispose() {

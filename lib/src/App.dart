@@ -1,10 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:jamiiclient/src/blocs/BallotBlocProvider.dart';
 import 'package:jamiiclient/src/blocs/biometricsBlocProvider.dart';
-import 'package:jamiiclient/src/screens/onboarding/OnboardingScreen.dart';
 import 'package:jamiiclient/src/screens/registration/RegistrationScreen.dart';
-import 'package:jamiiclient/src/screens/voting/Voting.dart';
 
 class App extends StatelessWidget {
   final cameras;

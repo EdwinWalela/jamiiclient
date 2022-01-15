@@ -16,13 +16,13 @@ class RegistrationScreen extends StatelessWidget {
   RegistrationScreen({this.cameras, this.keyPair});
 
   Widget build(BuildContext context) {
-    final PageController pageController = PageController(initialPage: 1);
+    final PageController pageController = PageController(initialPage: 0);
     final BiometricsBloc biometricsBloc = BiometricsProvider.of(context);
 
     // Public key to be sent with registration
     biometricsBloc.addKeyPair(keyPair);
 
-    // biometricsBloc.mockRegistration();
+    biometricsBloc.mockRegistration();
 
     return Scaffold(
       body: Padding(
@@ -52,11 +52,6 @@ class RegistrationScreen extends StatelessWidget {
               stream: biometricsBloc.user,
               builder: (BuildContext context, AsyncSnapshot<User> snapshot) {
                 if (snapshot.hasData) {
-                  if (snapshot.data.dob == "redo") {
-                    return CheckingScreen(
-                      pageController: pageController,
-                    );
-                  }
                   return DetailConfirmationScreen(
                     header: "Step 3: Confirm Registration Details",
                     user: snapshot.data,
@@ -65,6 +60,7 @@ class RegistrationScreen extends StatelessWidget {
                     biometricsBloc: biometricsBloc,
                   );
                 } else if (snapshot.hasError) {
+                  print(snapshot.error);
                   return DetailConfirmationScreen(
                     header: "Step 3: Confirm Registration Details",
                     user: null,
