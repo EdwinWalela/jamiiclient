@@ -1,14 +1,16 @@
 import 'dart:io';
 
 import 'package:jamiiclient/src/resources/DBProvider.dart';
+import 'package:jamiiclient/src/resources/repository.dart';
 import 'package:web_socket_channel/io.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'dart:convert';
 
 class SocketProvider {
-  final uri = "wss://689b-105-163-2-63.ngrok.io";
+  final uri = "wss://8fb0-105-163-2-63.ngrok.io";
 
   void mockRegistration(String details) {
+    Repository repo = Repository();
     print("mocking registration");
     final header = {
       "source": "client",
@@ -26,8 +28,8 @@ class SocketProvider {
           socket.emit("register", json.encode(header)),
           socket.on(
             "VOTE_ACK",
-            (data) => {
-              dbProvider.add(hash),
+            (data) async => {
+              repo.addHash(hash),
             },
           )
         });

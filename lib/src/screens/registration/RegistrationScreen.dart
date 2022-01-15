@@ -22,7 +22,7 @@ class RegistrationScreen extends StatelessWidget {
     // Public key to be sent with registration
     biometricsBloc.addKeyPair(keyPair);
 
-    biometricsBloc.mockRegistration();
+    // biometricsBloc.mockRegistration();
 
     return Scaffold(
       body: Padding(
@@ -76,7 +76,9 @@ class RegistrationScreen extends StatelessWidget {
               },
             ),
 
-            SuccessScreen(),
+            SuccessScreen(
+              biometricsBloc: biometricsBloc,
+            ),
           ],
         ),
       ),

@@ -15,10 +15,6 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:camera/camera.dart';
 
 void main() async {
-  await dbProvider.init();
-  final dbHash = await dbProvider.fetchHash();
-  final isRegistered = dbHash.length > 0;
-  print(isRegistered);
   WidgetsFlutterBinding.ensureInitialized();
   final secureStorage = FlutterSecureStorage();
   final algorithim = Ed25519();

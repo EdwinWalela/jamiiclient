@@ -34,7 +34,7 @@ class DbProvider {
 
   Future<void> add(String hash) async {
     final result = await db.query(
-      "voter",
+      "voters",
       columns: ["hash"],
       where: "hash = ?",
       whereArgs: [hash],

@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:jamiiclient/src/blocs/biometricsBlocProvider.dart';
+import 'package:jamiiclient/src/blocs/ballotBlocProvider.dart';
 import 'package:jamiiclient/src/screens/registration/RegistrationScreen.dart';
+import 'package:jamiiclient/src/screens/voting/Voting.dart';
 
 class App extends StatelessWidget {
   final cameras;
@@ -40,7 +42,10 @@ class App extends StatelessWidget {
                 cameras: this.cameras,
                 keyPair: this.keyPair,
               ),
-            )
+            ),
+        '/vote': (BuildContext context) => BallotBlocProvider(
+              child: VotingScreen(keyPair: this.keyPair),
+            ),
       },
     );
   }

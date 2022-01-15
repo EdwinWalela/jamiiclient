@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'dart:math';
 
 import 'package:cryptography/cryptography.dart';
 import 'package:jamiiclient/src/models/Biometrics.dart';
@@ -15,6 +16,7 @@ class BiometricsBloc {
   final _responseStream = BehaviorSubject<User>();
   final _extractedDetails = BehaviorSubject<String>();
   final _keyPair = BehaviorSubject<SimpleKeyPair>();
+  final _regHash = BehaviorSubject<String>();
 
   // Getters
 
@@ -33,6 +35,9 @@ class BiometricsBloc {
 
   Function(String) get addExtractedDetails => _extractedDetails.sink.add;
   Stream<String> get extractedDetails => _extractedDetails.stream;
+
+  Function(String) get addRegHash => _regHash.sink.add;
+  Stream<String> get regHash => _regHash.stream;
 
   final biometricsValidation = StreamTransformer<User, User>.fromHandlers(
     handleData: (user, sink) {
@@ -108,10 +113,22 @@ class BiometricsBloc {
     // await _responseStream.drain();
   }
 
+  retriveHash() async {
+    final hash = await _repository.retrieveHash();
+
+    if (hash.length > 0) {
+      addRegHash(hash[0]);
+    } else {
+      _regHash.sink.addError("hash missing");
+    }
+  }
+
   dispose() {
     _selfie.close();
     _idCard.close();
     _responseStream.close();
     _extractedDetails.close();
+    _regHash.close();
+    _keyPair.close();
   }
 }

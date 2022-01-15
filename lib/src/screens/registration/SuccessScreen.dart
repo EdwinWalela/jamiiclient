@@ -1,16 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:jamiiclient/src/blocs/BallotBlocProvider.dart';
+import 'package:jamiiclient/src/blocs/BiometricsBloc.dart';
+import 'package:jamiiclient/src/screens/voting/Voting.dart';
 
 class SuccessScreen extends StatelessWidget {
+  final BiometricsBloc biometricsBloc;
+
+  SuccessScreen({this.biometricsBloc});
+
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        buildSuccessIcon(context),
-        Container(margin: EdgeInsets.only(top: 30)),
-        buildTitle(),
-        Container(margin: EdgeInsets.only(top: 10)),
-        buildSubTitle(),
-      ],
+    this.biometricsBloc.retriveHash();
+    return StreamBuilder(
+      stream: biometricsBloc.regHash,
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        if (snapshot.hasData) {
+          print(snapshot.data);
+          _redirect(context, BallotBlocProvider(child: VotingScreen()));
+          return Container();
+        } else {
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              buildSuccessIcon(context),
+              Container(margin: EdgeInsets.only(top: 30)),
+              buildTitle(),
+              Container(margin: EdgeInsets.only(top: 10)),
+              buildSubTitle(),
+            ],
+          );
+        }
+      },
     );
   }
 
@@ -37,5 +56,14 @@ class SuccessScreen extends StatelessWidget {
       Icons.check_circle_outline_rounded,
       size: 100,
     );
+  }
+
+  void _redirect(BuildContext context, Widget screen) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      MaterialPageRoute newRoute =
+          MaterialPageRoute(builder: (BuildContext context) => screen);
+      Navigator.of(context)
+          .pushAndRemoveUntil(newRoute, ModalRoute.withName('/register'));
+    });
   }
 }

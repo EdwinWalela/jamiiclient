@@ -2,11 +2,24 @@ import 'dart:convert';
 import 'package:jamiiclient/src/models/Biometrics.dart';
 import 'package:jamiiclient/src/models/User.dart';
 import 'package:jamiiclient/src/resources/BioAPIProvider.dart';
+import 'package:jamiiclient/src/resources/DBProvider.dart';
 import 'package:jamiiclient/src/resources/SocketProvider.dart';
 
 class Repository {
   final BioAPIProvider bioAPIProvider = BioAPIProvider();
   final SocketProvider socketProvider = SocketProvider();
+
+  Future<void> addHash(String hash) async {
+    await dbProvider.init();
+    await dbProvider.add(hash);
+  }
+
+  Future<List<String>> retrieveHash() async {
+    await dbProvider.init();
+    final hash = await dbProvider.fetchHash();
+
+    return hash;
+  }
 
   Future<Biometrics> extractBiometrics(Biometrics bioData) async {
     final res = await bioAPIProvider.detectFaces(bioData);
