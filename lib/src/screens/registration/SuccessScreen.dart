@@ -9,13 +9,17 @@ class SuccessScreen extends StatelessWidget {
   SuccessScreen({this.biometricsBloc});
 
   Widget build(BuildContext context) {
-    this.biometricsBloc.retriveHash();
+    Future.delayed(const Duration(seconds: 13), () {
+      this.biometricsBloc.retriveHash();
+    });
+
     return StreamBuilder(
       stream: biometricsBloc.regHash,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.hasData) {
           print(snapshot.data);
-          _redirect(context, BallotBlocProvider(child: VotingScreen()));
+          Navigator.of(context).pushNamed('/vote');
+          // _redirect(context, BallotBlocProvider(child: VotingScreen()));
           return Container();
         } else {
           return Column(
@@ -42,7 +46,7 @@ class SuccessScreen extends StatelessWidget {
 
   Widget buildSubTitle() {
     return Text(
-      "Process might take a while you'll be notified once verification is complete",
+      "Process might take a while",
       textAlign: TextAlign.center,
       style: TextStyle(
         fontSize: 15,

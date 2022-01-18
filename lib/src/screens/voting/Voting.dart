@@ -1,6 +1,7 @@
 import 'package:cryptography/cryptography.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:jamiiclient/src/blocs/BallotBloc.dart';
 import 'package:jamiiclient/src/blocs/BallotBlocProvider.dart';
 import 'package:jamiiclient/src/models/Candidate.dart';
 import 'package:jamiiclient/src/screens/voting/Success.dart';
@@ -13,15 +14,13 @@ class VotingScreen extends StatelessWidget {
   VotingScreen({this.keyPair});
 
   Widget build(BuildContext context) {
-    final bloc = BallotBlocProvider.of(context);
-
+    final PageController pageController = PageController(initialPage: 0);
+    final BallotBloc bloc = BallotBlocProvider.of(context);
+    bloc.addKeyPair(this.keyPair);
     bloc.mockVote();
 
     // Hard coded data
     bloc.addData();
-    bloc.addKeyPair(this.keyPair);
-
-    final PageController pageController = PageController(initialPage: 0);
 
     return Scaffold(
       body: StreamBuilder(

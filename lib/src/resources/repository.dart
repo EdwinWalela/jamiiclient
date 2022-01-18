@@ -10,14 +10,18 @@ class Repository {
   final SocketProvider socketProvider = SocketProvider();
 
   Future<void> addHash(String hash) async {
+    print("adding hash");
     await dbProvider.init();
     await dbProvider.add(hash);
+    await dbProvider.close();
+    final repo = Repository();
   }
 
-  Future<List<String>> retrieveHash() async {
+  Future<List<dynamic>> retrieveHash() async {
+    print("retrieving hash");
     await dbProvider.init();
     final hash = await dbProvider.fetchHash();
-
+    await dbProvider.close();
     return hash;
   }
 
@@ -29,7 +33,7 @@ class Repository {
     Biometrics bio = Biometrics.fromJson(parsedJson);
     User user;
 
-    if (bio.extractedText.length == 8) {
+    if (bio.extractedText.length >= 8) {
       user = User(
         idNo: bio.extractedText[1],
         dob: bio.extractedText[3],
@@ -79,7 +83,6 @@ class Repository {
   }
 
   Future<bool> sendVote(String vote) async {
-    print(vote);
     final res = await socketProvider.sendVote(vote);
 
     return res;

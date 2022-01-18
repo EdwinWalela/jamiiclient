@@ -9,18 +9,18 @@ class DbProvider {
 
   init() async {
     Directory docsDirectory = await getApplicationDocumentsDirectory();
-    final path = join(docsDirectory.path, "jamii.db");
+    final path = join(docsDirectory.path, "jami9.db");
     // await deleteDatabase(path);
     db = await openDatabase(
       path,
-      version: 1,
+      version: 2,
       onCreate: (Database newDb, int version) {
         newDb.execute(
           """
             CREATE TABLE voters
             (
               id INTEGER PRIMARY KEY,
-              hash VARCHAR(255),
+              hash VARCHAR(255)
             );
           """,
         );

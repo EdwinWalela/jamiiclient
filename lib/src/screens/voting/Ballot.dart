@@ -60,9 +60,10 @@ class Ballot extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           ListTile(
-            leading: Icon(
-              Icons.person,
-              size: 50,
+            leading: Image.asset(
+              candidate.image,
+              width: 80,
+              height: 80,
             ),
             trailing: buildCheckBox(
               candidate,

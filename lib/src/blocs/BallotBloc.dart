@@ -32,81 +32,81 @@ class BallotBloc {
   addData() {
     final List<Candidate> presidentialCandidates = [
       Candidate(
-          name: "Edwin1",
-          deputy: "Walela",
-          image: "",
+          name: "Presidential Candidate 1",
+          deputy: "PC Deputy 1",
+          image: "assets/images/mango.jpg",
           position: 1,
           isChecked: false),
       Candidate(
-          name: "Edwin2",
-          deputy: "Walela",
-          image: "",
+          name: "Presidential Candidate 2",
+          deputy: "PC Deputy 2",
+          image: "assets/images/strawberry.jpg",
           position: 1,
           isChecked: false),
       Candidate(
-          name: "Edwin3",
-          deputy: "Walela",
-          image: "",
+          name: "Presidential Candidate 3",
+          deputy: "PC Deputy 3",
+          image: "assets/images/banana.jpg",
           position: 1,
           isChecked: false),
       Candidate(
-          name: "Edwin4",
-          deputy: "Walela",
-          image: "",
+          name: "Presidential Candidate 4",
+          deputy: "PC Deputy 4",
+          image: "assets/images/apple.png",
           position: 1,
           isChecked: false),
     ];
 
     final List<Candidate> parliamentaryCandidates = [
       Candidate(
-          name: "Edwin9",
-          deputy: "Walela",
-          image: "",
+          name: "Parliamentary Candidate 1",
+          deputy: "Deputy 1",
+          image: "assets/images/apple.png",
           position: 2,
           isChecked: false),
       Candidate(
-          name: "Edwin8",
-          deputy: "Walela",
-          image: "",
+          name: "Parliamentary Candidate 2",
+          deputy: "Deputy 2",
+          image: "assets/images/banana.jpg",
           position: 2,
           isChecked: false),
       Candidate(
-          name: "Edwin7",
-          deputy: "Walela",
-          image: "",
+          name: "Parliamentary Candidate 3",
+          deputy: "Deputy 3",
+          image: "assets/images/mango.jpg",
           position: 2,
           isChecked: false),
       Candidate(
-          name: "Edwin6",
-          deputy: "Walela",
-          image: "",
+          name: "Parliamentray Candidate 4",
+          deputy: "Deputy 4",
+          image: "assets/images/strawberry.jpg",
           position: 2,
           isChecked: false),
     ];
 
     final List<Candidate> countyCandidates = [
       Candidate(
-          name: "Edwinc1",
+          name: "County Candidate 1",
           deputy: "Walela",
-          image: "",
+          image: "assets/images/strawberry.jpg",
           position: 3,
           isChecked: false),
       Candidate(
-          name: "Edwinc2",
+          name: "County Candidate 2",
           deputy: "Walela",
-          image: "",
+          image: "assets/images/banana.jpg",
           position: 3,
           isChecked: false),
       Candidate(
-          name: "Edwinc3",
+          name: "County Candidate 3",
           deputy: "Walela",
-          image: "",
+          image: "assets/images/apple.png",
           position: 3,
           isChecked: false),
       Candidate(
-          name: "Edwinc4",
+          name: "County Candidate 4",
           deputy: "Walela",
-          image: "",
+          image: "assets/images/mango.jpg",
           position: 3,
           isChecked: false),
     ];

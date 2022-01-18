@@ -68,7 +68,6 @@ class BiometricsBloc {
   }
 
   submit() async {
-    drainUserStream();
     final selfiePath = _selfie.value;
     final idPath = _idCard.value;
 
@@ -106,7 +105,18 @@ class BiometricsBloc {
     final keyPair = _keyPair.value;
     final pubKey = await keyPair.extractPublicKey();
     final pubKey64 = base64Encode(pubKey.bytes);
-    _repository.registerVoter(details + "|" + pubKey64);
+
+    final algorithim = Ed25519();
+    final hash = details;
+
+    // sign extracted ID information with users keypair
+    final signature = await algorithim.sign(
+      utf8.encode(hash),
+      keyPair: keyPair,
+    );
+
+    final sig64 = base64Encode(signature.bytes);
+    _repository.registerVoter("$hash|$pubKey64|$sig64");
   }
 
   drainUserStream() {
@@ -117,7 +127,7 @@ class BiometricsBloc {
     final hash = await _repository.retrieveHash();
 
     if (hash.length > 0) {
-      addRegHash(hash[0]);
+      addRegHash(hash[0]['hash']);
     } else {
       _regHash.sink.addError("hash missing");
     }

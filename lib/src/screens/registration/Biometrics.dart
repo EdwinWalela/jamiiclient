@@ -36,6 +36,7 @@ class _BiometricsState extends State<Biometrics> {
       widget.camera,
       ResolutionPreset.veryHigh,
     );
+
     _initializeControllerFuture = _controller.initialize();
   }
 

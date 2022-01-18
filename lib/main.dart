@@ -6,6 +6,7 @@ import 'package:cryptography/cryptography.dart';
 import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
 import 'package:jamiiclient/src/App.dart';
+import 'package:jamiiclient/src/blocs/BallotBlocProvider.dart';
 import 'package:jamiiclient/src/resources/DBProvider.dart';
 import 'dart:convert';
 import 'package:web_socket_channel/io.dart';
@@ -99,9 +100,11 @@ void main() async {
   final backCamera = cameras.first;
   final frontCamera = cameras.last;
   runApp(
-    App(
-      cameras: [backCamera, frontCamera],
-      keyPair: keyPair,
+    BallotBlocProvider(
+      child: App(
+        cameras: [backCamera, frontCamera],
+        keyPair: keyPair,
+      ),
     ),
   );
 }

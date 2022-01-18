@@ -22,7 +22,7 @@ class Intro extends StatelessWidget {
             buildSteps("5. Submit Ballot"),
           ],
         ),
-        Container(margin: EdgeInsets.only(top: 50)),
+        Container(margin: EdgeInsets.only(top: 20)),
         buildButton("Get Started", pageController),
       ],
     );
