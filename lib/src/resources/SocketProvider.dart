@@ -61,7 +61,7 @@ class SocketProvider {
             },
           )
         });
-    Future.delayed(const Duration(seconds: 70), () {
+    await Future.delayed(const Duration(seconds: 10), () {
       socket.disconnect();
       socket.close();
       socket.close();
@@ -106,21 +106,16 @@ class SocketProvider {
     // Connect to node
     IO.Socket socket = IO.io(
       uri,
-      IO.OptionBuilder()
-          .enableForceNew()
-          .enableForceNewConnection()
-          .setTransports(['websocket'])
-          .disableAutoConnect()
-          .build(),
+      IO.OptionBuilder().enableForceNew().build(),
     );
-
-    socket.connect();
     socket.onConnect((data) => {
           print("Connected to Node"),
           socket.emit("vote", json.encode(header)),
         });
     socket.onConnectError((data) => {print("con-error")});
     socket.onError((data) => {print("error")});
+    await Future.delayed(const Duration(seconds: 10), () {});
+
     return isValid;
   }
 }
