@@ -60,10 +60,15 @@ class DetailConfirmationScreen extends StatelessWidget {
   }
 
   Widget noData() {
-    return Column(
-      children: [
-        Text("Unable To Extract Details"),
-      ],
+    return Padding(
+      padding: EdgeInsets.all(10),
+      child: Column(
+        children: [
+          Text("Unable To Extract Details"),
+          Text(
+              "Ensure ID Card is placed in the correct position and within the bounds"),
+        ],
+      ),
     );
   }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:jamiiclient/src/blocs/BallotBlocProvider.dart';
 import 'package:jamiiclient/src/blocs/BiometricsBloc.dart';
 import 'package:jamiiclient/src/screens/voting/Voting.dart';
@@ -9,7 +10,7 @@ class SuccessScreen extends StatelessWidget {
   SuccessScreen({this.biometricsBloc});
 
   Widget build(BuildContext context) {
-    Future.delayed(const Duration(seconds: 13), () {
+    Future.delayed(const Duration(seconds: 15), () {
       this.biometricsBloc.retriveHash();
     });
 
@@ -18,7 +19,9 @@ class SuccessScreen extends StatelessWidget {
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.hasData) {
           print(snapshot.data);
-          Navigator.of(context).pushNamed('/vote');
+          SchedulerBinding.instance.addPostFrameCallback((_) {
+            Navigator.of(context).pushNamed('/vote');
+          });
           // _redirect(context, BallotBlocProvider(child: VotingScreen()));
           return Container();
         } else {

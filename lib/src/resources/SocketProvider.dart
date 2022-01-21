@@ -7,7 +7,7 @@ import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'dart:convert';
 
 class SocketProvider {
-  final uri = "wss://12d4-41-90-68-79.ngrok.io";
+  final uri = "wss://3c90-41-90-70-248.ngrok.io";
 
   void mockRegistration(String details) {
     Repository repo = Repository();
@@ -47,6 +47,7 @@ class SocketProvider {
 
     // Connect to node
     IO.Socket socket = IO.io(uri);
+
     final hash = details.split("|")[0];
 
     socket.onConnect((data) => {
@@ -55,11 +56,18 @@ class SocketProvider {
           socket.on(
             "VOTE_ACK",
             (data) async => {
-              repo.addHash(hash),
+              await repo.addHash(hash),
               socket.disconnect(),
             },
           )
         });
+    Future.delayed(const Duration(seconds: 70), () {
+      socket.disconnect();
+      socket.close();
+      socket.close();
+      socket = null;
+      print("Socket disconnected");
+    });
   }
 
   void mockVote() {
@@ -93,18 +101,26 @@ class SocketProvider {
       "type": "0", // vote submission
       "data": "$data",
     };
-    print(header);
     // Send vote
-
-    // Connect to node
     print("sending vote");
-    IO.Socket socket = IO.io(uri);
+    // Connect to node
+    IO.Socket socket = IO.io(
+      uri,
+      IO.OptionBuilder()
+          .enableForceNew()
+          .enableForceNewConnection()
+          .setTransports(['websocket'])
+          .disableAutoConnect()
+          .build(),
+    );
 
+    socket.connect();
     socket.onConnect((data) => {
           print("Connected to Node"),
           socket.emit("vote", json.encode(header)),
         });
-
+    socket.onConnectError((data) => {print("con-error")});
+    socket.onError((data) => {print("error")});
     return isValid;
   }
 }

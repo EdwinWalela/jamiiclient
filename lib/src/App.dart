@@ -27,14 +27,14 @@ class App extends StatelessWidget {
       ),
       title: "Jamii",
       debugShowCheckedModeBanner: false,
-      home: OnBoardingScreen(),
+      // home: OnBoardingScreen(),
       // home: VotingScreen(keyPair: this.keyPair),
-      // home: BiometricsProvider(
-      //   child: RegistrationScreen(
-      //     cameras: this.cameras,
-      //     keyPair: this.keyPair,
-      //   ),
-      // ),
+      home: BiometricsProvider(
+        child: RegistrationScreen(
+          cameras: this.cameras,
+          keyPair: this.keyPair,
+        ),
+      ),
       routes: <String, WidgetBuilder>{
         '/register': (BuildContext context) => BiometricsProvider(
               child: RegistrationScreen(
@@ -42,9 +42,7 @@ class App extends StatelessWidget {
                 keyPair: this.keyPair,
               ),
             ),
-        '/vote': (BuildContext context) => BallotBlocProvider(
-              child: VotingScreen(keyPair: this.keyPair),
-            ),
+        '/vote': (BuildContext context) => VotingScreen(keyPair: this.keyPair),
       },
     );
   }

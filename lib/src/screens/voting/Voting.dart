@@ -17,7 +17,7 @@ class VotingScreen extends StatelessWidget {
     final PageController pageController = PageController(initialPage: 0);
     final BallotBloc bloc = BallotBlocProvider.of(context);
     bloc.addKeyPair(this.keyPair);
-    bloc.mockVote();
+    // bloc.mockVote();
 
     // Hard coded data
     bloc.addData();
