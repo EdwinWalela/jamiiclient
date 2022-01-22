@@ -14,7 +14,6 @@ class Repository {
     await dbProvider.init();
     await dbProvider.add(hash);
     await dbProvider.close();
-    final repo = Repository();
   }
 
   Future<List<dynamic>> retrieveHash() async {
@@ -23,6 +22,21 @@ class Repository {
     final hash = await dbProvider.fetchHash();
     await dbProvider.close();
     return hash;
+  }
+
+  Future<void> addResults(String res) async {
+    print("adding results");
+    await dbProvider.init();
+    await dbProvider.addRes(res);
+    await dbProvider.close();
+  }
+
+  Future<List<dynamic>> retrieveResult() async {
+    print("retrieving results");
+    await dbProvider.init();
+    final res = await dbProvider.fetchResult();
+    await dbProvider.close();
+    return res;
   }
 
   Future<Biometrics> extractBiometrics(Biometrics bioData) async {
@@ -84,7 +98,10 @@ class Repository {
 
   Future<bool> sendVote(String vote) async {
     final res = await socketProvider.sendVote(vote);
-
     return res;
+  }
+
+  queryResults() async {
+    socketProvider.queryResult();
   }
 }

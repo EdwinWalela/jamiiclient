@@ -9,18 +9,32 @@ class DbProvider {
 
   init() async {
     Directory docsDirectory = await getApplicationDocumentsDirectory();
-    final path = join(docsDirectory.path, "jami9.db");
+    final path = join(docsDirectory.path, "jami15.db");
     // await deleteDatabase(path);
     db = await openDatabase(
       path,
-      version: 2,
-      onCreate: (Database newDb, int version) {
-        newDb.execute(
+      version: 1,
+      onCreate: (Database newDb, int version) async {
+        await newDb.execute(
           """
             CREATE TABLE voters
             (
               id INTEGER PRIMARY KEY,
               hash VARCHAR(255)
+            );
+             CREATE TABLE results
+            (
+              id INTEGER PRIMARY KEY,
+              result VARCHAR(255)
+            );
+          """,
+        );
+        await newDb.execute(
+          """
+             CREATE TABLE results
+            (
+              id INTEGER PRIMARY KEY,
+              result VARCHAR(255)
             );
           """,
         );
@@ -46,6 +60,22 @@ class DbProvider {
         {"hash": hash},
       );
     }
+  }
+
+  Future<void> addRes(String res) async {
+    await db.insert(
+      "results",
+      {"result": res},
+    );
+  }
+
+  Future<List> fetchResult() async {
+    final result = await db.query(
+      "results",
+      columns: ["result"],
+    );
+
+    return result;
   }
 
   Future<List> fetchHash() async {

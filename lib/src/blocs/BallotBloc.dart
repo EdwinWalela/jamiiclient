@@ -14,12 +14,14 @@ class BallotBloc {
   final _county = BehaviorSubject<Candidate>();
   final _keyPair = BehaviorSubject<SimpleKeyPair>();
   final _electionCandidates = BehaviorSubject<List<Candidate>>();
+  final _results = BehaviorSubject<String>();
 
   Function(Candidate) get addPresidential => _presidential.sink.add;
   Function(Candidate) get addParliamentary => _parliamentary.sink.add;
   Function(Candidate) get addCounty => _county.sink.add;
   Function(SimpleKeyPair) get addKeyPair => _keyPair.sink.add;
   Function(List<Candidate>) get addCandidates => _electionCandidates.sink.add;
+  Function(String) get addResults => _results.sink.add;
 
   Stream<Candidate> get presidential => _presidential.stream;
   Stream<Candidate> get parliamentary => _parliamentary.stream;
@@ -28,6 +30,7 @@ class BallotBloc {
 
   Stream<List<Candidate>> get selectedCandidates =>
       CombineLatestStream.list([_presidential, _parliamentary, _county]);
+  Stream<String> get results => _results.stream;
 
   addData() {
     final List<Candidate> presidentialCandidates = [
@@ -77,7 +80,7 @@ class BallotBloc {
           position: 2,
           isChecked: false),
       Candidate(
-          name: "Parliamentray Candidate 4",
+          name: "Parliamentary Candidate 4",
           deputy: "Deputy 4",
           image: "assets/images/strawberry.jpg",
           position: 2,
@@ -185,11 +188,27 @@ class BallotBloc {
     return digest;
   }
 
+  queryRes() async {
+    _repository.queryResults();
+  }
+
+  retriveResults() async {
+    final result = await _repository.retrieveResult();
+
+    if (result.length > 0) {
+      addResults(result[0]['result']);
+    } else {
+      print("No results");
+      _results.sink.addError("no results");
+    }
+  }
+
   dispose() {
     _presidential.close();
     _parliamentary.close();
     _county.close();
     _electionCandidates.close();
     _keyPair.close();
+    _results.close();
   }
 }

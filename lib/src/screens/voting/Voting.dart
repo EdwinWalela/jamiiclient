@@ -110,7 +110,7 @@ class VotingScreen extends StatelessWidget {
                       }
                     },
                   ),
-                  SuccessScreen()
+                  SuccessScreen(bloc: bloc)
                 ],
               ),
             );

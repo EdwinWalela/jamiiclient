@@ -16,6 +16,8 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:camera/camera.dart';
 
 void main() async {
+  // var res = SocketProvider().queryResult();
+  // print("a" + res);
   WidgetsFlutterBinding.ensureInitialized();
   final secureStorage = FlutterSecureStorage();
   final algorithim = Ed25519();

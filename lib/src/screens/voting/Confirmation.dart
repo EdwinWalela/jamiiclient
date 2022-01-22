@@ -78,6 +78,9 @@ class ConfirmationScreen extends StatelessWidget {
             curve: Curves.easeInOut,
           );
           bloc.submit();
+          Future.delayed(const Duration(seconds: 15), () {
+            bloc.queryRes();
+          });
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,

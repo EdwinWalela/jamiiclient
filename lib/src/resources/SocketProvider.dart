@@ -7,7 +7,7 @@ import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'dart:convert';
 
 class SocketProvider {
-  final uri = "wss://3c90-41-90-70-248.ngrok.io";
+  final uri = "wss://852b-41-90-70-248.ngrok.io";
 
   void mockRegistration(String details) {
     Repository repo = Repository();
@@ -115,7 +115,42 @@ class SocketProvider {
     socket.onConnectError((data) => {print("con-error")});
     socket.onError((data) => {print("error")});
     await Future.delayed(const Duration(seconds: 10), () {});
-
+    await Future.delayed(const Duration(seconds: 0), () {
+      socket.disconnect();
+      socket.close();
+      socket.close();
+      socket = null;
+      print("Socket disconnected");
+    });
     return isValid;
+  }
+
+  queryResult() async {
+    await Future.delayed(const Duration(seconds: 20), () {});
+    Repository repo = Repository();
+    var data = "";
+
+    print("connecting to node");
+    // Connect to node
+    IO.Socket socket = IO.io(
+      uri,
+      IO.OptionBuilder().enableForceNew().build(),
+    );
+    socket.onConnect((data) => {
+          print("Connected to Node"),
+          socket.emit("req", ""),
+          socket.on("result", (res) async {
+            await repo.addResults(res);
+          })
+        });
+
+    await Future.delayed(const Duration(seconds: 20), () {});
+    await Future.delayed(const Duration(seconds: 10), () {
+      socket.disconnect();
+      socket.close();
+      socket.close();
+      socket = null;
+      print("Socket disconnected");
+    });
   }
 }

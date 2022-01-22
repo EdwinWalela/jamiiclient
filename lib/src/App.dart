@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:jamiiclient/src/blocs/biometricsBlocProvider.dart';
 import 'package:jamiiclient/src/blocs/ballotBlocProvider.dart';
+import 'package:jamiiclient/src/resources/SocketProvider.dart';
 import 'package:jamiiclient/src/screens/onboarding/OnboardingScreen.dart';
 import 'package:jamiiclient/src/screens/registration/RegistrationScreen.dart';
 import 'package:jamiiclient/src/screens/voting/Voting.dart';
@@ -27,14 +28,14 @@ class App extends StatelessWidget {
       ),
       title: "Jamii",
       debugShowCheckedModeBanner: false,
-      // home: OnBoardingScreen(),
+      home: OnBoardingScreen(),
       // home: VotingScreen(keyPair: this.keyPair),
-      home: BiometricsProvider(
-        child: RegistrationScreen(
-          cameras: this.cameras,
-          keyPair: this.keyPair,
-        ),
-      ),
+      // home: BiometricsProvider(
+      //   child: RegistrationScreen(
+      //     cameras: this.cameras,
+      //     keyPair: this.keyPair,
+      //   ),
+      // ),
       routes: <String, WidgetBuilder>{
         '/register': (BuildContext context) => BiometricsProvider(
               child: RegistrationScreen(
