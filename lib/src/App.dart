@@ -10,11 +10,13 @@ import 'package:jamiiclient/src/screens/voting/Voting.dart';
 class App extends StatelessWidget {
   final cameras;
   final keyPair;
+  final nodeUrl;
   // final val;RR
 
-  App({this.cameras, this.keyPair});
+  App({this.cameras, this.keyPair, this.nodeUrl});
 
   Widget build(BuildContext context) {
+    print("app" + nodeUrl);
     return MaterialApp(
       theme: ThemeData(
         primaryColor: Colors.purple,
@@ -34,6 +36,7 @@ class App extends StatelessWidget {
       //   child: RegistrationScreen(
       //     cameras: this.cameras,
       //     keyPair: this.keyPair,
+      //     nodeUrl: this.nodeUrl,
       //   ),
       // ),
       routes: <String, WidgetBuilder>{
@@ -41,6 +44,7 @@ class App extends StatelessWidget {
               child: RegistrationScreen(
                 cameras: this.cameras,
                 keyPair: this.keyPair,
+                nodeUrl: this.nodeUrl,
               ),
             ),
         '/vote': (BuildContext context) => VotingScreen(keyPair: this.keyPair),

@@ -13,6 +13,7 @@ class DetailConfirmationScreen extends StatelessWidget {
   final PageController pageController;
   final SimpleKeyPair keyPair;
   final BiometricsBloc biometricsBloc;
+  final String nodeUrl;
 
   DetailConfirmationScreen({
     this.header,
@@ -20,6 +21,7 @@ class DetailConfirmationScreen extends StatelessWidget {
     this.pageController,
     this.keyPair,
     this.biometricsBloc,
+    this.nodeUrl,
   });
 
   Widget build(BuildContext context) {
@@ -30,7 +32,7 @@ class DetailConfirmationScreen extends StatelessWidget {
         Container(
           margin: EdgeInsets.only(top: 40),
         ),
-        buildButton(user != null ? checkAllValid(user) : false),
+        buildButton(user != null ? checkAllValid(user) : false, this.nodeUrl),
       ],
     );
   }
@@ -131,7 +133,7 @@ class DetailConfirmationScreen extends StatelessWidget {
     );
   }
 
-  Widget buildButton(bool allValid) {
+  Widget buildButton(bool allValid, String nodeUrl) {
     return SizedBox(
       width: 200,
       child: ElevatedButton(
@@ -154,8 +156,8 @@ class DetailConfirmationScreen extends StatelessWidget {
 
             // uniquely identify user & save localy
             this.biometricsBloc.addExtractedDetails(digest.toString());
-
-            await this.biometricsBloc.sendExtractedDetails();
+            print("detconf" + nodeUrl);
+            await this.biometricsBloc.sendExtractedDetails(nodeUrl);
 
             pageController.nextPage(
               duration: Duration(milliseconds: 500),

@@ -84,8 +84,8 @@ class Repository {
     return user;
   }
 
-  registerVoter(String details) {
-    socketProvider.registerVoter(details);
+  registerVoter(String details, String nodeUrl) {
+    socketProvider.registerVoter(details, nodeUrl);
   }
 
   mockRegistration(String details) {

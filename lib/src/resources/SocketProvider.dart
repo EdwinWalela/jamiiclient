@@ -35,7 +35,7 @@ class SocketProvider {
         });
   }
 
-  registerVoter(String details) async {
+  registerVoter(String details, String nodeUrl) async {
     print("registering voter");
     Repository repo = Repository();
     final data = details;
@@ -46,7 +46,8 @@ class SocketProvider {
     };
 
     // Connect to node
-    IO.Socket socket = IO.io(uri);
+    print(nodeUrl);
+    IO.Socket socket = IO.io(nodeUrl);
 
     final hash = details.split("|")[0];
 

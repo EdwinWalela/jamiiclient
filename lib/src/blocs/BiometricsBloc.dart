@@ -100,7 +100,7 @@ class BiometricsBloc {
     }
   }
 
-  sendExtractedDetails() async {
+  sendExtractedDetails(String nodeUrl) async {
     final details = _extractedDetails.value;
     final keyPair = _keyPair.value;
     final pubKey = await keyPair.extractPublicKey();
@@ -116,7 +116,7 @@ class BiometricsBloc {
     );
 
     final sig64 = base64Encode(signature.bytes);
-    _repository.registerVoter("$hash|$pubKey64|$sig64");
+    _repository.registerVoter("$hash|$pubKey64|$sig64", nodeUrl);
   }
 
   drainUserStream() {

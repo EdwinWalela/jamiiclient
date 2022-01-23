@@ -12,8 +12,9 @@ import 'package:jamiiclient/src/screens/registration/SuccessScreen.dart';
 class RegistrationScreen extends StatelessWidget {
   final cameras;
   final keyPair;
+  final nodeUrl;
 
-  RegistrationScreen({this.cameras, this.keyPair});
+  RegistrationScreen({this.cameras, this.keyPair, this.nodeUrl});
 
   Widget build(BuildContext context) {
     final PageController pageController = PageController(initialPage: 0);
@@ -21,7 +22,7 @@ class RegistrationScreen extends StatelessWidget {
 
     // Public key to be sent with registration
     biometricsBloc.addKeyPair(keyPair);
-
+    print("reg" + nodeUrl);
     // biometricsBloc.mockRegistration();
 
     return Scaffold(
@@ -58,6 +59,7 @@ class RegistrationScreen extends StatelessWidget {
                     pageController: pageController,
                     keyPair: this.keyPair,
                     biometricsBloc: biometricsBloc,
+                    nodeUrl: this.nodeUrl,
                   );
                 } else if (snapshot.hasError) {
                   print(snapshot.error);
@@ -67,6 +69,7 @@ class RegistrationScreen extends StatelessWidget {
                     pageController: pageController,
                     keyPair: this.keyPair,
                     biometricsBloc: biometricsBloc,
+                    nodeUrl: this.nodeUrl,
                   );
                 } else {
                   return CheckingScreen(
