@@ -11,7 +11,8 @@ import 'package:jamiiclient/src/screens/voting/Intro.dart';
 
 class VotingScreen extends StatelessWidget {
   final SimpleKeyPair keyPair;
-  VotingScreen({this.keyPair});
+  final nodeUrl;
+  VotingScreen({this.keyPair, this.nodeUrl});
 
   Widget build(BuildContext context) {
     final PageController pageController = PageController(initialPage: 0);
@@ -100,9 +101,11 @@ class VotingScreen extends StatelessWidget {
                         AsyncSnapshot<List<Candidate>> snapshot) {
                       if (snapshot.hasData) {
                         return ConfirmationScreen(
-                            bloc: bloc,
-                            candidates: snapshot.data,
-                            pageController: pageController);
+                          bloc: bloc,
+                          candidates: snapshot.data,
+                          pageController: pageController,
+                          nodeUrl: this.nodeUrl,
+                        );
                       } else {
                         return ConfirmationScreen(
                           candidates: [],
@@ -110,7 +113,7 @@ class VotingScreen extends StatelessWidget {
                       }
                     },
                   ),
-                  SuccessScreen(bloc: bloc)
+                  SuccessScreen(bloc: bloc, nodeUrl: this.nodeUrl)
                 ],
               ),
             );

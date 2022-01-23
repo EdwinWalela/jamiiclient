@@ -47,7 +47,10 @@ class App extends StatelessWidget {
                 nodeUrl: this.nodeUrl,
               ),
             ),
-        '/vote': (BuildContext context) => VotingScreen(keyPair: this.keyPair),
+        '/vote': (BuildContext context) => VotingScreen(
+              keyPair: this.keyPair,
+              nodeUrl: this.nodeUrl,
+            ),
       },
     );
   }

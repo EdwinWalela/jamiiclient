@@ -3,8 +3,12 @@ import 'package:jamiiclient/src/blocs/BallotBloc.dart';
 
 class SuccessScreen extends StatelessWidget {
   final BallotBloc bloc;
+  final String nodeUrl;
 
-  SuccessScreen({this.bloc});
+  SuccessScreen({
+    this.bloc,
+    this.nodeUrl,
+  });
 
   Widget build(BuildContext context) {
     return StreamBuilder(

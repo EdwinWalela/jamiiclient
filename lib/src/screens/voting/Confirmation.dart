@@ -6,8 +6,14 @@ class ConfirmationScreen extends StatelessWidget {
   final List<Candidate> candidates;
   final PageController pageController;
   final BallotBloc bloc;
+  final String nodeUrl;
 
-  ConfirmationScreen({this.candidates, this.pageController, this.bloc});
+  ConfirmationScreen({
+    this.candidates,
+    this.pageController,
+    this.bloc,
+    this.nodeUrl,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -77,9 +83,9 @@ class ConfirmationScreen extends StatelessWidget {
             duration: Duration(milliseconds: 500),
             curve: Curves.easeInOut,
           );
-          bloc.submit();
+          bloc.submit(this.nodeUrl);
           Future.delayed(const Duration(seconds: 15), () {
-            bloc.queryRes();
+            bloc.queryRes(this.nodeUrl);
           });
         },
         child: Row(

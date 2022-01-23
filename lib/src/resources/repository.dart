@@ -96,12 +96,12 @@ class Repository {
     socketProvider.mockVote();
   }
 
-  Future<bool> sendVote(String vote) async {
-    final res = await socketProvider.sendVote(vote);
+  Future<bool> sendVote(String vote, String nodeUrl) async {
+    final res = await socketProvider.sendVote(vote, nodeUrl);
     return res;
   }
 
-  queryResults() async {
-    socketProvider.queryResult();
+  queryResults(String nodeUrl) async {
+    socketProvider.queryResult(nodeUrl);
   }
 }

@@ -46,7 +46,6 @@ class SocketProvider {
     };
 
     // Connect to node
-    print(nodeUrl);
     IO.Socket socket = IO.io(nodeUrl);
 
     final hash = details.split("|")[0];
@@ -93,7 +92,7 @@ class SocketProvider {
         });
   }
 
-  Future<bool> sendVote(String vote) async {
+  Future<bool> sendVote(String vote, String nodeUrl) async {
     final data = vote;
     var res = 0;
     var isValid = true;
@@ -106,7 +105,7 @@ class SocketProvider {
     print("sending vote");
     // Connect to node
     IO.Socket socket = IO.io(
-      uri,
+      nodeUrl,
       IO.OptionBuilder().enableForceNew().build(),
     );
     socket.onConnect((data) => {
@@ -126,7 +125,7 @@ class SocketProvider {
     return isValid;
   }
 
-  queryResult() async {
+  queryResult(String nodeUrl) async {
     await Future.delayed(const Duration(seconds: 20), () {});
     Repository repo = Repository();
     var data = "";
@@ -134,7 +133,7 @@ class SocketProvider {
     print("connecting to node");
     // Connect to node
     IO.Socket socket = IO.io(
-      uri,
+      nodeUrl,
       IO.OptionBuilder().enableForceNew().build(),
     );
     socket.onConnect((data) => {

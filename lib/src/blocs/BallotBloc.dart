@@ -127,7 +127,7 @@ class BallotBloc {
     _repository.mockVote();
   }
 
-  submit() async {
+  submit(String nodeUrl) async {
     final timestamp = DateTime.now().millisecondsSinceEpoch.toString();
 
     final presidentialCandidate = _presidential.value;
@@ -160,7 +160,7 @@ class BallotBloc {
     vote.pubKey64 = pub64;
     vote.timestamp = timestamp;
 
-    final res = await _repository.sendVote(vote.toString());
+    final res = await _repository.sendVote(vote.toString(), nodeUrl);
 
     print("\n");
     print(res);
@@ -188,8 +188,8 @@ class BallotBloc {
     return digest;
   }
 
-  queryRes() async {
-    _repository.queryResults();
+  queryRes(String nodeUrl) async {
+    _repository.queryResults(nodeUrl);
   }
 
   retriveResults() async {
